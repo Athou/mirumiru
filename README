@@ -130,7 +130,7 @@ OpenShift Express provides several environment variables to reference for ease
 of use.  The following list are some common variables but far from exhaustive:
 
     System.getenv("OPENSHIFT_APP_NAME")  - Application name
-    System.getenv("OPENSHIFT_APP_DIR")   - Application dir
+    System.getenv("OPENSHIFT_GEAR_DIR")   - Application dir
     System.getenv("OPENSHIFT_DATA_DIR")  - For persistent storage (between pushes)
     System.getenv("OPENSHIFT_TMP_DIR")   - Temp storage (unmodified files deleted after 10 days)
 
