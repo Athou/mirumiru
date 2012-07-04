@@ -1,6 +1,5 @@
 package fr.mirumiru.pages;
 
-import org.apache.log4j.chainsaw.Main;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.repeater.RepeatingView;
