@@ -2,6 +2,7 @@ package fr.mirumiru.pages;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.repeater.RepeatingView;
 
 import com.google.common.collect.LinkedListMultimap;
@@ -17,6 +18,7 @@ public abstract class TemplatePage extends WebPage {
 	public TemplatePage() {
 
 		add(new Label("title", getTitle()));
+		add(new BookmarkablePageLink<HomePage>("logo-link", HomePage.class));
 		addNavigationMenu();
 
 	}
