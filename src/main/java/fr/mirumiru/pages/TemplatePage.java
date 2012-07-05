@@ -7,6 +7,7 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 
+import fr.mirumiru.MiruApplication;
 import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.nav.NavigationHeader;
 
@@ -22,11 +23,12 @@ public abstract class TemplatePage extends WebPage {
 
 	private void addNavigationMenu() {
 		Multimap<String, PageModel> pages = LinkedListMultimap.create();
-//		pages.put("Home", new PageModel("Home Page", HomePage.class));
-//		pages.put("Quizz", new PageModel("Scoreboard", QuizzScorePage.class));
-//		pages.put("Quizz",
-//				new PageModel("Merge Requests", QuizzMergePage.class));
-//		pages.put("Debug", new PageModel("View Logs", LogViewerPage.class));
+		// pages.put("Home", new PageModel("Home Page", HomePage.class));
+		// pages.put("Quizz", new PageModel("Scoreboard",
+		// QuizzScorePage.class));
+		// pages.put("Quizz",
+		// new PageModel("Merge Requests", QuizzMergePage.class));
+		// pages.put("Debug", new PageModel("View Logs", LogViewerPage.class));
 
 		RepeatingView repeatingView = new RepeatingView("nav-headers");
 
@@ -40,9 +42,9 @@ public abstract class TemplatePage extends WebPage {
 
 	protected abstract String getTitle();
 
-//	protected <T> T getBean(Class<? extends T> klass) {
-//		return Main.getInstance().select(klass).get();
-//	}
+	// protected <T> T getBean(Class<? extends T> klass) {
+	// return Main.getInstance().select(klass).get();
+	// }
 
 	public class PageModel {
 		private String name;
@@ -66,5 +68,10 @@ public abstract class TemplatePage extends WebPage {
 
 	public MiruSession getAuthSession() {
 		return (MiruSession) super.getSession();
+	}
+
+	public <T> T getBean(Class<? extends T> klass) {
+		MiruApplication application = (MiruApplication) getApplication();
+		return application.getBean(klass);
 	}
 }

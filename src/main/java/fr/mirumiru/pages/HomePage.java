@@ -1,5 +1,6 @@
 package fr.mirumiru.pages;
 
+
 @SuppressWarnings("serial")
 public class HomePage extends TemplatePage {
 
