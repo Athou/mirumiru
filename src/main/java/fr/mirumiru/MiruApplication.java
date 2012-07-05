@@ -18,6 +18,7 @@ import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.pages.GalleryListPage;
 import fr.mirumiru.pages.HomePage;
 import fr.mirumiru.pages.NewsPage;
+import fr.mirumiru.pages.admin.AdminHomePage;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 
@@ -41,7 +42,9 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	private void mountPages() {
 		mountPage("/news/#{page}", NewsPage.class);
 		mountPage("/gallery", GalleryListPage.class);
-		
+
+		mountPage("/admin", AdminHomePage.class);
+
 	}
 
 	@SuppressWarnings("unchecked")
