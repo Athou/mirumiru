@@ -40,7 +40,7 @@ public class FacebookService {
 			Collections.sort(albums, new Comparator<Album>() {
 				@Override
 				public int compare(Album o1, Album o2) {
-					return o1.getCreatedTime().compareTo(o2.getCreatedTime());
+					return o2.getCreatedTime().compareTo(o1.getCreatedTime());
 				}
 			});
 			this.albums = albums;
