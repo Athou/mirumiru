@@ -1,5 +1,6 @@
 package fr.mirumiru.services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,7 +36,7 @@ public class FacebookService {
 			FacebookClient client = new DefaultFacebookClient();
 			Connection<Album> connection = client.fetchConnection(
 					"127903530580737/albums", Album.class);
-			List<Album> albums = connection.getData();
+			List<Album> albums = new ArrayList<Album>(connection.getData());
 			Collections.sort(albums, new Comparator<Album>() {
 				@Override
 				public int compare(Album o1, Album o2) {
