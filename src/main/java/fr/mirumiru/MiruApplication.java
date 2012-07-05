@@ -19,6 +19,8 @@ import fr.mirumiru.pages.GalleryListPage;
 import fr.mirumiru.pages.HomePage;
 import fr.mirumiru.pages.NewsPage;
 import fr.mirumiru.pages.admin.AdminHomePage;
+import fr.mirumiru.pages.admin.AdminNewsEditPage;
+import fr.mirumiru.pages.admin.AdminNewsListPage;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 
@@ -44,6 +46,8 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		mountPage("/gallery", GalleryListPage.class);
 
 		mountPage("/admin", AdminHomePage.class);
+		mountPage("/admin/news", AdminNewsListPage.class);
+		mountPage("/admin/news/edit", AdminNewsEditPage.class);
 
 	}
 
