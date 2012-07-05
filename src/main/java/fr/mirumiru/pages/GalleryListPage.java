@@ -27,7 +27,7 @@ public class GalleryListPage extends TemplatePage {
 				Album album = item.getModelObject();
 				item.add(new Label("name"));
 				item.add(new Label("count"));
-				item.add(new Label("description"));
+				//item.add(new Label("description"));
 				ExternalLink link = new ExternalLink("link", album.getLink());
 				String imageUrl = "http://graph.facebook.com/"
 						+ album.getCoverPhoto() + "/picture";
