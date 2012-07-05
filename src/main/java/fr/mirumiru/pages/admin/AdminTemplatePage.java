@@ -8,5 +8,8 @@ import fr.mirumiru.pages.TemplatePage;
 @SuppressWarnings("serial")
 @AuthorizeInstantiation(Roles.ADMIN)
 public abstract class AdminTemplatePage extends TemplatePage {
+	@Override
+	protected void addNavigationMenu() {
 
+	}
 }

@@ -24,7 +24,6 @@ public class NewsPage extends TemplatePage {
 	public NewsPage(PageParameters params) {
 
 		page = params.get("page").toInt(0);
-		System.out.println(page);
 		if (page < 1) {
 			page = 1;
 		}
