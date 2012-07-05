@@ -47,7 +47,7 @@ public class MiruApplication extends AuthenticatedWebApplication {
 
 		mountPage("/admin", AdminHomePage.class);
 		mountPage("/admin/news", AdminNewsListPage.class);
-		mountPage("/admin/news/edit", AdminNewsEditPage.class);
+		mountPage("/admin/news/${id}", AdminNewsEditPage.class);
 
 	}
 

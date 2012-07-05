@@ -15,6 +15,17 @@ import fr.mirumiru.model.News;
 @Stateless
 public class NewsDAO extends GenericDAO<News> {
 
+	public List<News> findAllOrderByNewest() {
+
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<News> query = builder.createQuery(getType());
+		Root<News> root = query.from(getType());
+		query.orderBy(builder.desc(root.get("created")));
+		TypedQuery<News> q = em.createQuery(query);
+		return q.getResultList();
+
+	}
+
 	public List<News> findAllOrderByNewest(int startIndex, int count) {
 
 		CriteriaBuilder builder = em.getCriteriaBuilder();

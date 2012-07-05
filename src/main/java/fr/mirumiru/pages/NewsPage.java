@@ -13,6 +13,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import fr.mirumiru.model.News;
 import fr.mirumiru.services.NewsDAO;
+import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
 public class NewsPage extends TemplatePage {
@@ -51,20 +52,14 @@ public class NewsPage extends TemplatePage {
 		WebMarkupContainer previous = new WebMarkupContainer("previous");
 		previous.setVisible(page >= 2);
 		add(previous);
-
-		PageParameters prevParams = new PageParameters();
-		prevParams.add("page", page - 1);
 		previous.add(new BookmarkablePageLink<NewsPage>("link", NewsPage.class,
-				prevParams));
+				WicketUtils.buildParams("page", page - 1)));
 
 		WebMarkupContainer next = new WebMarkupContainer("next");
 		next.setVisible(page < pageCount);
 		add(next);
-
-		PageParameters nextParams = new PageParameters();
-		nextParams.add("page", page + 1);
 		next.add(new BookmarkablePageLink<NewsPage>("link", NewsPage.class,
-				nextParams));
+				WicketUtils.buildParams("page", page + 1)));
 
 	}
 
