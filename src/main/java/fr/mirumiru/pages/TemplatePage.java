@@ -23,12 +23,8 @@ public abstract class TemplatePage extends WebPage {
 
 	private void addNavigationMenu() {
 		Multimap<String, PageModel> pages = LinkedListMultimap.create();
-		// pages.put("Home", new PageModel("Home Page", HomePage.class));
-		// pages.put("Quizz", new PageModel("Scoreboard",
-		// QuizzScorePage.class));
-		// pages.put("Quizz",
-		// new PageModel("Merge Requests", QuizzMergePage.class));
-		// pages.put("Debug", new PageModel("View Logs", LogViewerPage.class));
+		pages.put("Home", new PageModel("Home Page", HomePage.class));
+		pages.put("Home", new PageModel("News", NewsPage.class));
 
 		RepeatingView repeatingView = new RepeatingView("nav-headers");
 
@@ -41,10 +37,6 @@ public abstract class TemplatePage extends WebPage {
 	}
 
 	protected abstract String getTitle();
-
-	// protected <T> T getBean(Class<? extends T> klass) {
-	// return Main.getInstance().select(klass).get();
-	// }
 
 	public class PageModel {
 		private String name;

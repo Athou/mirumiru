@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,6 +25,9 @@ public class News {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar created;
+
+	@ManyToOne
+	private User author;
 
 	/* GETTERS AND SETTERS */
 
@@ -57,6 +61,14 @@ public class News {
 
 	public void setCreated(Calendar created) {
 		this.created = created;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 }

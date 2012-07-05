@@ -1,2 +1,7 @@
--- You can use this file to load seed data into the database using SQL statements
--- insert into Member (id, name, email, phone_number) values (0, 'John Smith', 'john.smith@mailinator.com', '2125551212') 
+insert into User (id, name) values (0, 'Admin')
+
+insert into News (id, title, content, author_id) values (0, 'News 1', 'Hello, world', 0)
+insert into News (id, title, content, author_id) values (1, 'News 2', 'Hello, world', 0)
+insert into News (id, title, content, author_id) values (2, 'News 3', 'Hello, world', 0)
+insert into News (id, title, content, author_id) values (3, 'News 4', 'Hello, world', 0)
+insert into News (id, title, content, author_id) values (4, 'News 5', 'Hello, world', 0)

@@ -16,6 +16,7 @@ import org.apache.wicket.markup.html.WebPage;
 
 import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.pages.HomePage;
+import fr.mirumiru.pages.NewsPage;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 
@@ -24,6 +25,7 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	@Override
 	protected void init() {
 		super.init();
+		mountPages();
 		getMarkupSettings().setStripWicketTags(true);
 
 		try {
@@ -33,6 +35,11 @@ public class MiruApplication extends AuthenticatedWebApplication {
 			throw new IllegalStateException("Unable to obtain CDI BeanManager",
 					e);
 		}
+	}
+
+	private void mountPages() {
+		mountPage("/news/#{page}", NewsPage.class);
+		
 	}
 
 	@SuppressWarnings("unchecked")
