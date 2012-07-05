@@ -78,8 +78,8 @@ public class NewsPage extends TemplatePage {
 
 		@Override
 		protected List<News> load() {
-			return getBean(NewsDAO.class).findAll((page - 1) * NEWS_PER_PAGE,
-					NEWS_PER_PAGE);
+			return getBean(NewsDAO.class).findAllOrderByNewest(
+					(page - 1) * NEWS_PER_PAGE, NEWS_PER_PAGE);
 		}
 	}
 
