@@ -30,6 +30,8 @@ public class RssServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		resp.setContentType("text/xml");
 
 		MiruApplication app = (MiruApplication) Application.get();
 		NewsDAO dao = app.getBean(NewsDAO.class);
