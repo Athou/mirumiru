@@ -3,8 +3,10 @@ package fr.mirumiru.pages.admin;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.StatelessLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PropertyListView;
@@ -14,7 +16,7 @@ import fr.mirumiru.model.News;
 import fr.mirumiru.services.NewsDAO;
 import fr.mirumiru.utils.WicketUtils;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "rawtypes" })
 public class AdminNewsListPage extends AdminTemplatePage {
 
 	public AdminNewsListPage() {
@@ -26,7 +28,7 @@ public class AdminNewsListPage extends AdminTemplatePage {
 			@Override
 			protected void populateItem(ListItem<News> item) {
 				News news = item.getModelObject();
-
+				final long id = news.getId();
 				BookmarkablePageLink<AdminNewsEditPage> link = new BookmarkablePageLink<AdminNewsEditPage>(
 						"link", AdminNewsEditPage.class,
 						WicketUtils.buildParams("id", news.getId()));
@@ -36,6 +38,16 @@ public class AdminNewsListPage extends AdminTemplatePage {
 				item.add(new Label("created",
 						new SimpleDateFormat("yyyy-MM-dd").format(news
 								.getCreated().getTime())));
+				StatelessLink delete = new StatelessLink("delete") {
+					@Override
+					public void onClick() {
+						getBean(NewsDAO.class).deleteById(id);
+						setResponsePage(getPageClass());
+					}
+				};
+				delete.add(new AttributeModifier("onclick",
+						"return confirm('Delete news ?');"));
+				item.add(delete);
 			}
 		};
 		add(newsView);
