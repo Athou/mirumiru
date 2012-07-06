@@ -18,7 +18,7 @@ import fr.mirumiru.utils.WicketUtils;
 @SuppressWarnings("serial")
 public class NewsPage extends TemplatePage {
 
-	private static final int NEWS_PER_PAGE = 2;
+	private static final int NEWS_PER_PAGE = 1;
 
 	private int page = 1;
 

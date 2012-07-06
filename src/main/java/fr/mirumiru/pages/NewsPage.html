@@ -19,6 +19,18 @@
 				<li class="previous" wicket:id="previous"><a href="#" wicket:id="link">&larr; Newer</a></li>
 				<li class="next" wicket:id="next"><a href="#" wicket:id="link">Older &rarr;</a></li>
 			</ul>
+			
+			<div class="comments">
+			     <div id="disqus_thread"></div>
+		        <script type="text/javascript">
+		            var disqus_shortname = 'mirumiru';
+		            (function() {
+		                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		            })();
+		        </script>
+			</div>
 		</div>
 	</wicket:extend>
 </body>
