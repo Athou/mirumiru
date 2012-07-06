@@ -1,5 +1,8 @@
 package fr.mirumiru.pages.admin;
 
+import java.util.Calendar;
+
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.TextArea;
@@ -16,17 +19,25 @@ import fr.mirumiru.services.NewsDAO;
 public class AdminNewsEditPage extends AdminTemplatePage {
 
 	public AdminNewsEditPage(PageParameters params) {
-		long id = params.get("id").toLong();
+		long id = params.get("id").toLong(-1);
 		final FeedbackPanel feedback = new FeedbackPanel("feedback");
 		feedback.setVisible(false);
 		add(feedback);
 
+		add(new Label("label", id == -1 ? "Add News" : "Edit News"));
 		Form<News> form = new StatelessForm<News>("form",
 				new CompoundPropertyModel<News>(new NewsModel(id))) {
 			@Override
 			protected void onSubmit() {
 				News news = getModelObject();
-				getBean(NewsDAO.class).update(news);
+				NewsDAO dao = getBean(NewsDAO.class);
+				if (news.getId() == null) {
+					news.setCreated(Calendar.getInstance());
+					news.setAuthor(getAuthSession().getUser());
+					dao.save(news);
+				} else {
+					dao.update(news);
+				}
 				feedback.info("News saved successfully");
 				feedback.setVisible(true);
 			}
@@ -50,6 +61,9 @@ public class AdminNewsEditPage extends AdminTemplatePage {
 
 		@Override
 		protected News load() {
+			if (id == -1) {
+				return new News();
+			}
 			return getBean(NewsDAO.class).findById(id);
 		}
 	}

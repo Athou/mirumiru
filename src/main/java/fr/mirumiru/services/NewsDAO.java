@@ -26,17 +26,35 @@ public class NewsDAO extends GenericDAO<News> {
 
 	}
 
-	public List<News> findAllOrderByNewest(int startIndex, int count) {
-
+	public News getLatest() {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<News> query = builder.createQuery(getType());
 		Root<News> root = query.from(getType());
 		query.orderBy(builder.desc(root.get("created")));
 		TypedQuery<News> q = em.createQuery(query);
-		q.setMaxResults(count);
-		q.setFirstResult(startIndex);
-		return q.getResultList();
+		q.setMaxResults(1);
+		return q.getSingleResult();
+	}
 
+	public NextAndPrevious getNextAndPrevious(Long id) {
+		NextAndPrevious result = new NextAndPrevious();
+
+		News news = findById(id);
+		List<News> list = findAllOrderByNewest();
+
+		int index = list.indexOf(news);
+		if (index > 0) {
+			result.previous = list.get(index - 1).getId();
+		}
+		if (index < list.size() - 1) {
+			result.next = list.get(index + 1).getId();
+		}
+		return result;
+	}
+
+	public class NextAndPrevious {
+		public Long previous;
+		public Long next;
 	}
 
 	@Override

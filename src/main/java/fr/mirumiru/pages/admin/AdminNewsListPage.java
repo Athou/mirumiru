@@ -18,6 +18,9 @@ import fr.mirumiru.utils.WicketUtils;
 public class AdminNewsListPage extends AdminTemplatePage {
 
 	public AdminNewsListPage() {
+
+		add(new BookmarkablePageLink<AdminNewsEditPage>("new",
+				AdminNewsEditPage.class));
 		ListView<News> newsView = new PropertyListView<News>("news",
 				new NewsModel()) {
 			@Override

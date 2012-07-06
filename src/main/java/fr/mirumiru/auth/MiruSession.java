@@ -1,12 +1,23 @@
 package fr.mirumiru.auth;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
+import org.apache.wicket.Application;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
 
+import com.google.common.collect.Iterables;
+
+import fr.mirumiru.MiruApplication;
+import fr.mirumiru.model.User;
+import fr.mirumiru.services.UserDAO;
+
 @SuppressWarnings("serial")
 public class MiruSession extends AuthenticatedWebSession {
+
+	private User user;
 
 	public MiruSession(Request request) {
 		super(request);
@@ -24,12 +35,21 @@ public class MiruSession extends AuthenticatedWebSession {
 	@Override
 	public boolean authenticate(String username, String password) {
 		String adminPassword = "admin";
-		if (StringUtils.equals(password, adminPassword)) {
-			setAttribute("name", username);
-			return true; 
+
+		MiruApplication app = (MiruApplication) Application.get();
+		List<User> users = app.getBean(UserDAO.class).findByField("name",
+				username);
+
+		if (!users.isEmpty() && StringUtils.equals(password, adminPassword)) {
+			user = Iterables.getOnlyElement(users);
+			return true;
 		} else {
 			return false;
 		}
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 }

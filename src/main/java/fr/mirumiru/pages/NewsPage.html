@@ -3,26 +3,29 @@
 	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
 <body>
 	<wicket:extend>
-		<div class="page-header">
-			<h1>News</h1>
-		</div>
 		<div class="row-fluid">
 			<div wicket:id="news">
-				<h2>
-					<span wicket:id="title" />
-					<small> by <span wicket:id="author.name" /></small>
-				</h2>
+				<div class="page-header">
+					<h1>
+						<span wicket:id="title" />
+						<small> by <span wicket:id="author.name" /></small>
+					</h1>
+				</div>
 				<span wicket:id="content" />
 			</div>
 
+			<div style="height: 25px" />
+			<hr />
 			<ul class="pager">
-				<li class="previous" wicket:id="previous"><a href="#" wicket:id="link">&larr; Newer</a></li>
-				<li class="next" wicket:id="next"><a href="#" wicket:id="link">Older &rarr;</a></li>
+				<li class="previous" wicket:id="previous"><a href="#"
+						wicket:id="link">&larr; Newer</a></li>
+				<li class="next" wicket:id="next"><a href="#" wicket:id="link">Older
+						&rarr;</a></li>
 			</ul>
-			
+
 			<div class="comments">
-			     <div id="disqus_thread"></div>
-		        <script type="text/javascript">
+				<div id="disqus_thread"></div>
+				<script type="text/javascript">
 		            var disqus_shortname = 'mirumiru';
 		            (function() {
 		                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

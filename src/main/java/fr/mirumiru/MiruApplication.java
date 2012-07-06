@@ -14,6 +14,8 @@ import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authentication.pages.SignInPage;
 import org.apache.wicket.markup.html.WebPage;
 
+import fr.mirumiru.auth.LoginPage;
+import fr.mirumiru.auth.LogoutPage;
 import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.pages.GalleryListPage;
 import fr.mirumiru.pages.HomePage;
@@ -42,12 +44,15 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	}
 
 	private void mountPages() {
-		mountPage("/news/#{page}", NewsPage.class);
+		mountPage("/news/#{id}", NewsPage.class);
 		mountPage("/gallery", GalleryListPage.class);
 
+		mountPage("/login", LoginPage.class);
+		mountPage("/logout", LogoutPage.class);
+		
 		mountPage("/admin", AdminHomePage.class);
 		mountPage("/admin/news", AdminNewsListPage.class);
-		mountPage("/admin/news/${id}", AdminNewsEditPage.class);
+		mountPage("/admin/news/edit/#{id}", AdminNewsEditPage.class);
 
 	}
 

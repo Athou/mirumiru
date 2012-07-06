@@ -28,6 +28,17 @@ public class News {
 
 	@ManyToOne
 	private User author;
+	
+	public News() {
+		
+	}
+
+	public News(String title, String content, Calendar created, User author) {
+		this.title = title;
+		this.content = content;
+		this.created = created;
+		this.author = author;
+	}
 
 	/* GETTERS AND SETTERS */
 
