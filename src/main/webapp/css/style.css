@@ -16,8 +16,9 @@ body { /*padding-top: 60px;*/
 	text-align: center;
 }
 
-#players td {
-	width: 250px;
+.alert ul {
+	list-style: none;
+	margin-bottom: 0px;
 }
 
 .pointer {

@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -16,9 +17,20 @@ public class AdminNewsEditPage extends AdminTemplatePage {
 
 	public AdminNewsEditPage(PageParameters params) {
 		long id = params.get("id").toLong();
+		final FeedbackPanel feedback = new FeedbackPanel("feedback");
+		feedback.setVisible(false);
+		add(feedback);
 
 		Form<News> form = new StatelessForm<News>("form",
-				new CompoundPropertyModel<News>(new NewsModel(id)));
+				new CompoundPropertyModel<News>(new NewsModel(id))) {
+			@Override
+			protected void onSubmit() {
+				News news = getModelObject();
+				getBean(NewsDAO.class).update(news);
+				feedback.info("News saved successfully");
+				feedback.setVisible(true);
+			}
+		};
 		add(form);
 
 		TextField<News> title = new TextField<News>("title");
