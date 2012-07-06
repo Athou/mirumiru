@@ -27,6 +27,10 @@ public abstract class TemplatePage extends WebPage {
 		Multimap<String, PageModel> pages = LinkedListMultimap.create();
 		pages.put("Home", new PageModel("Home Page", HomePage.class));
 		pages.put("Home", new PageModel("News", NewsPage.class));
+		
+		pages.put("Miru Miru", new PageModel("About", AboutPage.class));
+		pages.put("Miru Miru", new PageModel("Contact", ContactPage.class));
+		
 		pages.put("Pictures", new PageModel("Albums", GalleryListPage.class));
 
 		RepeatingView repeatingView = new RepeatingView("nav-headers");
