@@ -11,7 +11,6 @@ import javax.naming.NamingException;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
-import org.apache.wicket.authroles.authentication.pages.SignInPage;
 import org.apache.wicket.markup.html.WebPage;
 
 import fr.mirumiru.auth.LoginPage;
@@ -73,7 +72,7 @@ public class MiruApplication extends AuthenticatedWebApplication {
 
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
-		return SignInPage.class;
+		return LoginPage.class;
 	}
 
 	@Override
