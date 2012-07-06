@@ -2,12 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
 <body>
+	<wicket:head>
+		<script type="text/javascript">
+			tinyMCE.init({
+		        theme : "advanced",
+		        mode : "textareas",
+		        plugins : "fullpage",
+		        theme_advanced_buttons3_add : "fullpage"
+			});
+		</script>
+	</wicket:head>
 	<wicket:extend>
 		<div class="page-header">
 			<h1>Edit News</h1>
 		</div>
-		<div class="alert alert-success" wicket:id="feedback">
-		</div>
+		<div class="alert alert-success" wicket:id="feedback"></div>
 		<form wicket:id="form" class="well">
 
 			<div class="control-group">
@@ -20,7 +29,7 @@
 			<div class="control-group">
 				<label class="control-label" for="content">Content</label>
 				<div class="controls">
-					<textarea id="content" wicket:id="content"></textarea>
+					<textarea id="content" wicket:id="content" style="width: 100%" rows="30"></textarea>
 				</div>
 			</div>
 			<div>

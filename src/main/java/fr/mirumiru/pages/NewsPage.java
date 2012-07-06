@@ -40,7 +40,7 @@ public class NewsPage extends TemplatePage {
 			@Override
 			protected void populateItem(ListItem<News> item) {
 				item.add(new Label("title"));
-				item.add(new Label("content"));
+				item.add(new Label("content").setEscapeModelStrings(false));
 				item.add(new Label("author.name"));
 			}
 		};
