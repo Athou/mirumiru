@@ -14,14 +14,14 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import fr.mirumiru.model.News;
 import fr.mirumiru.services.NewsDAO;
+import fr.mirumiru.utils.BootstrapFeedbackPanel;
 
 @SuppressWarnings("serial")
 public class AdminNewsEditPage extends AdminTemplatePage {
 
 	public AdminNewsEditPage(PageParameters params) {
 		long id = params.get("id").toLong(-1);
-		final FeedbackPanel feedback = new FeedbackPanel("feedback");
-		feedback.setVisible(false);
+		final FeedbackPanel feedback = new BootstrapFeedbackPanel("feedback");
 		add(feedback);
 
 		add(new Label("label", id == -1 ? "Add News" : "Edit News"));
@@ -39,7 +39,6 @@ public class AdminNewsEditPage extends AdminTemplatePage {
 					dao.update(news);
 				}
 				feedback.info("News saved successfully");
-				feedback.setVisible(true);
 			}
 		};
 		add(form);
