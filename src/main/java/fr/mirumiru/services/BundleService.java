@@ -32,4 +32,16 @@ public class BundleService {
 		}
 	}
 
+	public String getSmtpGmailUserName() {
+		return props.getProperty("mail.smtp.gmail.username");
+	}
+
+	public String getSmtpGmailPassword() {
+		return props.getProperty("mail.smtp.gmail.password");
+	}
+
+	public String getMailDest() {
+		return props.getProperty("mail.dest");
+	}
+
 }

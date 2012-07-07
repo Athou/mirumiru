@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.StringValidator;
 
+import fr.mirumiru.services.MailService;
 import fr.mirumiru.utils.BootstrapFeedbackPanel;
 
 @SuppressWarnings("serial")
@@ -26,11 +27,13 @@ public class ContactPage extends TemplatePage {
 		Form<Void> form = new StatelessForm<Void>("form") {
 			@Override
 			protected void onSubmit() {
-				System.out.println("cc " + name);
-				System.out.println("cc " + email);
-				System.out.println("cc " + message);
-				// TODO send mail
-				info("Message sent successfully !");
+				try {
+					getBean(MailService.class).sendMail(name, email, message);
+					info("Message sent successfully !");
+				} catch (Exception e) {
+					log.error("Could not send email", e);
+					error("Could not send email");
+				}
 			}
 		};
 		add(form);

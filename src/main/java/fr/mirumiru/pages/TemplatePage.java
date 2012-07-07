@@ -1,5 +1,6 @@
 package fr.mirumiru.pages;
 
+import org.apache.log4j.Logger;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -14,6 +15,8 @@ import fr.mirumiru.nav.NavigationHeader;
 
 @SuppressWarnings("serial")
 public abstract class TemplatePage extends WebPage {
+	
+	protected Logger log = Logger.getLogger(getClass());
 
 	public TemplatePage() {
 

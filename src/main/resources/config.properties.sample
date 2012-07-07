@@ -1,0 +1,5 @@
+# Mailing
+
+mail.smtp.gmail.username = user
+mail.smtp.gmail.password = pass
+mail.dest = some@one.com
