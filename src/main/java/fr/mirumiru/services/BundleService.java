@@ -1,5 +1,6 @@
 package fr.mirumiru.services;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -23,7 +24,13 @@ public class BundleService {
 		props = new Properties();
 		InputStream is = null;
 		try {
-			is = getClass().getResourceAsStream("/config.properties");
+			String configPath = "/config.properties";
+			String openshiftDataDir = System.getenv("OPENSHIFT_DATA_DIR");
+			if (openshiftDataDir != null) {
+				is = new FileInputStream(openshiftDataDir + configPath);
+			} else {
+				is = getClass().getResourceAsStream(configPath);
+			}
 			props.load(is);
 		} catch (Exception e) {
 			log.fatal("Could not load config file", e);
