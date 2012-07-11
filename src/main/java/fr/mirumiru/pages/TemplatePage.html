@@ -65,23 +65,30 @@
 	        <div class="span3">
 	        	<h3><wicket:message key="facebook.feed" /></h3> 
 	        	<div wicket:id="fb-post" class="fb-post">
-	        		<span wicket:id="fb-content"></span>
-	        		<a href="#" wicket:id="fb-link">
+	        		<div wicket:id="fb-content"></div>
+	        		<a href="#" wicket:id="fb-link" target="_blank">
 	        			<span wicket:id="fb-postdate"></span>
 	        		</a>
 	        	</div>
 			</div>
           <div class="span3">
-            <h3>Latest Blog Posts</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit nisl ac metus porta placerat. Donec semper consectetur neque eget hendrerit. <a href="http://www.littlesparkvt.com">Read More&gt;</a></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit nisl ac metus porta placerat. Donec semper consectetur neque eget hendrerit. <a href="http://www.littlesparkvt.com">Read More&gt;</a></p>
+    	      <h3><wicket:message key="crochet" /></h3>
+	          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit nisl ac metus porta placerat. Donec semper consectetur neque eget hendrerit. </div>
+   	          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit nisl ac metus porta placerat. Donec semper consectetur neque eget hendrerit. </div>
           </div>
           <div class="span3">
-            <h3>Contact Us!</h3>
-                <p>Have a question? We can help you!</p>
-                <br>by phone: 1-(555)-555-5555 
-                <br>by mail: info@littlesparkvt.com
-                <br>or by our: <a href="contact.htm">Contact Page</a>
+            <h3><wicket:message key="help.help1" /></h3>
+                <div><wicket:message key="help.help2" /></div>
+                <div>
+                	<wicket:message key="help.help3">
+                    	<a href="#" wicket:id="faq">
+  		                	<wicket:message key="help.faq"/>
+                    	</a>
+                    	<a href="#" wicket:id="contactpage">
+                    		<wicket:message key="help.contactpage"/>
+                    	</a>
+                	</wicket:message>
+                </div>
           </div>
           <div class="span3">
             <h3>Facebook</h3>

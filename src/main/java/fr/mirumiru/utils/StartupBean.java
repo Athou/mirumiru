@@ -31,16 +31,13 @@ public class StartupBean {
 		user.setName("admin");
 		userDAO.save(user);
 
-		newsDAO.save(new News("News 1", "Hello, world!",
-				Calendar.getInstance(), user));
-		newsDAO.save(new News("News 2", "Hello, world!",
-				Calendar.getInstance(), user));
-		newsDAO.save(new News("News 3", "Hello, world!",
-				Calendar.getInstance(), user));
-		newsDAO.save(new News("News 4", "Hello, world!",
-				Calendar.getInstance(), user));
-		newsDAO.save(new News("News 5", "Hello, world!",
-				Calendar.getInstance(), user));
+		String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit nisl ac metus porta placerat. Donec semper consectetur neque eget hendrerit.";
+
+		newsDAO.save(new News("News 1", lorem, Calendar.getInstance(), user));
+		newsDAO.save(new News("News 2", lorem, Calendar.getInstance(), user));
+		newsDAO.save(new News("News 3", lorem, Calendar.getInstance(), user));
+		newsDAO.save(new News("News 4", lorem, Calendar.getInstance(), user));
+		newsDAO.save(new News("News 5", lorem, Calendar.getInstance(), user));
 
 	}
 }

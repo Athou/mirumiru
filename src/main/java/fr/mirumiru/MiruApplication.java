@@ -19,6 +19,8 @@ import fr.mirumiru.auth.LogoutPage;
 import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.pages.AboutPage;
 import fr.mirumiru.pages.ContactPage;
+import fr.mirumiru.pages.CrochetInfoPage;
+import fr.mirumiru.pages.FAQPage;
 import fr.mirumiru.pages.GalleryListPage;
 import fr.mirumiru.pages.HomePage;
 import fr.mirumiru.pages.NewsPage;
@@ -51,10 +53,11 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	}
 
 	private void mountPages() {
-		mountPage("/news/#{id}", NewsPage.class);
-		mountPage("/albums", GalleryListPage.class);
-
 		mountPage("/about", AboutPage.class);
+		mountPage("/news/#{id}", NewsPage.class);
+		mountPage("/crochet", CrochetInfoPage.class);
+		mountPage("/albums", GalleryListPage.class);
+		mountPage("/faq", FAQPage.class);
 		mountPage("/contact", ContactPage.class);
 
 		mountPage("/login", LoginPage.class);

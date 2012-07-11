@@ -46,7 +46,7 @@ public class LocaleFirstMapper implements IRequestMapper {
 		if (url != null) {
 			Locale locale = Session.get().getLocale();
 			if (locale == null) {
-				locale = Locale.ENGLISH;
+				locale = Locale.FRENCH;
 			}
 			url.getSegments().add(0, locale.getLanguage());
 		}

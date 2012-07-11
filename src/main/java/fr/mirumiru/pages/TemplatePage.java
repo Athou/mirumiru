@@ -66,6 +66,10 @@ public abstract class TemplatePage extends WebPage {
 
 		add(flags);
 
+		add(new BookmarkablePageLink<TemplatePage>("faq", FAQPage.class));
+		add(new BookmarkablePageLink<TemplatePage>("contactpage",
+				ContactPage.class));
+
 	}
 
 	protected void addNavigationMenu() {
@@ -73,7 +77,9 @@ public abstract class TemplatePage extends WebPage {
 		pages.add(new PageModel("home", HomePage.class));
 		pages.add(new PageModel("about", AboutPage.class));
 		pages.add(new PageModel("news", NewsPage.class));
-		pages.add(new PageModel("pictures", GalleryListPage.class));
+		pages.add(new PageModel("crochet", CrochetInfoPage.class));
+		pages.add(new PageModel("albums", GalleryListPage.class));
+		pages.add(new PageModel("faq", FAQPage.class));
 		pages.add(new PageModel("contact", ContactPage.class));
 
 		ListView<PageModel> entries = new ListView<PageModel>("menu-entry",
@@ -122,7 +128,10 @@ public abstract class TemplatePage extends WebPage {
 						DateFormat.SHORT, getSession().getLocale());
 
 				item.add(new Label("fb-content", message));
-				ExternalLink link = new ExternalLink("fb-link", post.getLink());
+				String[] parts = post.getId().split("_");
+				ExternalLink link = new ExternalLink("fb-link",
+						"http://www.facebook.com/" + parts[0] + "/posts/"
+								+ parts[1]);
 				item.add(link);
 				link.add(new Label("fb-postdate", dateFormat.format(post
 						.getCreatedTime())));
