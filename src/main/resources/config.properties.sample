@@ -3,3 +3,6 @@
 mail.smtp.gmail.username = user
 mail.smtp.gmail.password = pass
 mail.dest = some@one.com
+
+# Facebook auth token for feed retrieval
+facebook.authtoken=***

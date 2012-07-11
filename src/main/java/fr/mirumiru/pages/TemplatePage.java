@@ -1,29 +1,30 @@
 package fr.mirumiru.pages;
 
-import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.log4j.Logger;
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.link.StatelessLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PropertyListView;
-import org.apache.wicket.markup.repeater.RepeatingView;
+import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.ResourceModel;
 
-import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
+import com.restfb.types.Post;
 
 import fr.mirumiru.MiruApplication;
 import fr.mirumiru.auth.MiruSession;
-import fr.mirumiru.nav.NavigationHeader;
+import fr.mirumiru.services.FacebookService;
 import fr.mirumiru.utils.WicketUtils;
 import fr.mirumiru.utils.WicketUtils.Language;
 
@@ -35,11 +36,13 @@ public abstract class TemplatePage extends WebPage {
 		add(new Label("title", getTitle()));
 		add(new BookmarkablePageLink<HomePage>("logo-link", HomePage.class));
 		addNavigationMenu();
+		addFacebookPosts();
 
 		IModel<List<Language>> model = new LoadableDetachableModel<List<Language>>() {
 			@Override
 			protected List<Language> load() {
-				return Lists.reverse(Lists.newArrayList(WicketUtils.Language.values()));
+				return Lists.reverse(Lists.newArrayList(WicketUtils.Language
+						.values()));
 			}
 		};
 
@@ -66,22 +69,66 @@ public abstract class TemplatePage extends WebPage {
 	}
 
 	protected void addNavigationMenu() {
-		Multimap<String, PageModel> pages = LinkedListMultimap.create();
-		pages.put("home", new PageModel("homepage", HomePage.class));
-		pages.put("home", new PageModel("news", NewsPage.class));
+		List<PageModel> pages = Lists.newArrayList();
+		pages.add(new PageModel("home", HomePage.class));
+		pages.add(new PageModel("about", AboutPage.class));
+		pages.add(new PageModel("news", NewsPage.class));
+		pages.add(new PageModel("pictures", GalleryListPage.class));
+		pages.add(new PageModel("contact", ContactPage.class));
 
-		pages.put("pictures", new PageModel("albums", GalleryListPage.class));
+		ListView<PageModel> entries = new ListView<PageModel>("menu-entry",
+				pages) {
+			@Override
+			protected void populateItem(ListItem<PageModel> item) {
+				PageModel model = item.getModelObject();
+				BookmarkablePageLink<TemplatePage> link = new BookmarkablePageLink<TemplatePage>(
+						"link", model.getPageClass());
+				item.add(link);
+				link.add(new Label("name", new ResourceModel(model.getName())));
+				final Class<? extends TemplatePage> pageClass = model
+						.getPageClass();
+				link.add(new AttributeModifier("class",
+						new AbstractReadOnlyModel<String>() {
+							public String getObject() {
+								return getPage().getClass().equals(pageClass) ? "active"
+										: AttributeModifier.VALUELESS_ATTRIBUTE_REMOVE;
+							}
+						}));
+			}
+		};
+		add(entries);
+	}
 
-		pages.put("mirumiru", new PageModel("about", AboutPage.class));
-		pages.put("mirumiru", new PageModel("contact", ContactPage.class));
+	private void addFacebookPosts() {
 
-		RepeatingView repeatingView = new RepeatingView("nav-headers");
-		for (String category : pages.keySet()) {
-			repeatingView.add(new NavigationHeader(repeatingView.newChildId(),
-					category, pages.get(category)));
-		}
-		add(repeatingView);
+		LoadableDetachableModel<List<Post>> model = new LoadableDetachableModel<List<Post>>() {
+			@Override
+			protected List<Post> load() {
+				return getBean(FacebookService.class).getPosts();
+			}
+		};
 
+		ListView<Post> posts = new ListView<Post>("fb-post", model) {
+			@Override
+			protected void populateItem(ListItem<Post> item) {
+				Post post = item.getModelObject();
+
+				String message = post.getMessage();
+				int max = 100;
+				if (message.length() > max) {
+					message = message.substring(0, max - 1) + "...";
+				}
+				DateFormat dateFormat = DateFormat.getDateInstance(
+						DateFormat.SHORT, getSession().getLocale());
+
+				item.add(new Label("fb-content", message));
+				ExternalLink link = new ExternalLink("fb-link", post.getLink());
+				item.add(link);
+				link.add(new Label("fb-postdate", dateFormat.format(post
+						.getCreatedTime())));
+			}
+		};
+		add(posts);
 	}
 
 	protected abstract String getTitle();
@@ -117,23 +164,5 @@ public abstract class TemplatePage extends WebPage {
 
 	public Logger getLog() {
 		return Logger.getLogger(getClass());
-	}
-
-	private static class LocaleWrapper implements Serializable {
-
-		private Locale locale;
-
-		public LocaleWrapper(Locale locale) {
-			this.locale = locale;
-		}
-
-		public Locale getLocale() {
-			return locale;
-		}
-
-		@Override
-		public String toString() {
-			return locale.getDisplayLanguage(locale);
-		}
 	}
 }

@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.InvocationContext;
 
 import org.apache.log4j.Logger;
 
@@ -16,6 +18,7 @@ import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.types.Album;
+import com.restfb.types.Post;
 
 @Singleton
 public class FacebookService {
@@ -26,26 +29,81 @@ public class FacebookService {
 	@Inject
 	Logger log;
 
-	private List<Album> albums;
-	private long albumValidity = 0;
+	private FacebookCache cache;
+
+	@AroundInvoke
+	public Object refreshIfNeeded(InvocationContext ctx) throws Exception {
+		Object result = null;
+		if (cache == null || !cache.isValid()) {
+			refresh();
+		}
+		result = ctx.proceed();
+		return result;
+	}
 
 	public List<Album> getAlbums() {
-		long now = Calendar.getInstance().getTimeInMillis();
-		if (albums == null || albumValidity < now) {
-			log.info("Refreshing album list from Facebook");
-			FacebookClient client = new DefaultFacebookClient();
-			Connection<Album> connection = client.fetchConnection(
-					"127903530580737/albums", Album.class);
-			List<Album> albums = new ArrayList<Album>(connection.getData());
-			Collections.sort(albums, new Comparator<Album>() {
-				@Override
-				public int compare(Album o1, Album o2) {
-					return o2.getCreatedTime().compareTo(o1.getCreatedTime());
-				}
-			});
-			this.albums = albums;
-			this.albumValidity = now + TimeUnit.HOURS.toMillis(1);
+		return cache.getAlbums();
+	}
+
+	public List<Post> getPosts() {
+		return cache.getPosts();
+	}
+
+	private void refresh() {
+		log.info("Refreshing album list from Facebook");
+
+		FacebookClient client = new DefaultFacebookClient(bundle.getFacebookAuthToken());
+
+		Connection<Album> albumConnection = client.fetchConnection(
+				"127903530580737/albums", Album.class);
+		List<Album> albums = new ArrayList<Album>(albumConnection.getData());
+		Collections.sort(albums, new Comparator<Album>() {
+			@Override
+			public int compare(Album o1, Album o2) {
+				return o2.getCreatedTime().compareTo(o1.getCreatedTime());
+			}
+		});
+
+		Connection<Post> postConnection = client.fetchConnection(
+				"127903530580737/feed", Post.class);
+		List<Post> posts = new ArrayList<Post>(postConnection.getData());
+		Collections.sort(posts, new Comparator<Post>() {
+			@Override
+			public int compare(Post o1, Post o2) {
+				return o2.getCreatedTime().compareTo(o1.getCreatedTime());
+			}
+		});
+		if (posts.size() > 2) {
+			posts = posts.subList(0, 2);
 		}
-		return albums;
+
+		cache = new FacebookCache(albums, posts);
+
+	}
+
+	private class FacebookCache {
+
+		private List<Album> albums;
+		private long validUntil = 0;
+		private List<Post> posts;
+
+		public FacebookCache(List<Album> albums, List<Post> posts) {
+			this.albums = albums;
+			this.posts = posts;
+			validUntil = Calendar.getInstance().getTimeInMillis()
+					+ TimeUnit.HOURS.toMillis(1);
+		}
+
+		public boolean isValid() {
+			return Calendar.getInstance().getTimeInMillis() < validUntil;
+		}
+
+		public List<Album> getAlbums() {
+			return albums;
+		}
+
+		public List<Post> getPosts() {
+			return posts;
+		}
 	}
 }

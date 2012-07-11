@@ -7,7 +7,6 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 
-import fr.mirumiru.nav.NavigationHeader;
 import fr.mirumiru.pages.TemplatePage;
 
 @SuppressWarnings("serial")
@@ -19,11 +18,11 @@ public abstract class AdminTemplatePage extends TemplatePage {
 		pages.put("News", new PageModel("News", AdminNewsListPage.class));
 
 		RepeatingView repeatingView = new RepeatingView("nav-headers");
-
-		for (String category : pages.keySet()) {
-			repeatingView.add(new NavigationHeader(repeatingView.newChildId(),
-					category, pages.get(category)));
-		}
+		// TODO menu for admin
+		// for (String category : pages.keySet()) {
+		// repeatingView.add(new Label(repeatingView.newChildId(),
+		// category, pages.get(category)));
+		// }
 		add(repeatingView);
 	}
 }

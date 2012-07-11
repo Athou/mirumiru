@@ -39,6 +39,10 @@ public class BundleService {
 		}
 	}
 
+	public String getFacebookAuthToken() {
+		return props.getProperty("facebook.authtoken");
+	}
+	
 	public String getSmtpGmailUserName() {
 		return props.getProperty("mail.smtp.gmail.username");
 	}

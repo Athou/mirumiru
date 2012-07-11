@@ -5,15 +5,15 @@ body {
 
 .logo-text {
 	font-family: 'Nothing You Could Do', cursive;
-	font-size: 80px;
+	font-size: 100px;
 	color: black;
 	display: block;
-	margin: 50px 0 40px 0;
+	margin: 60px 0 40px 0;
 }
 
 .logo-text,.logo-text:hover,.logo-text:visited {
 	text-decoration: none;
-	color: black;
+	color: white;
 }
 
 .logo-text-chapo {
@@ -56,6 +56,21 @@ body {
 	background-image: url('../images/flags/fr.png');
 }
 
+.menu-entries {
+	margin-bottom: 10px;
+}
+
+.menu-entry a {
+	font-size: large; padding : 9px 20px 0 20px;
+	color: #999;
+	text-decoration: none;
+	padding: 9px 20px 0 20px;
+}
+
+.menu-entry a:hover,.menu-entry .active {
+	color: white;
+}
+
 .gallery .thumbnail img {
 	height: 150px;
 }
@@ -68,6 +83,18 @@ div.thumbnail:hover {
 }
 
 /* Bootstrap customization */
-.well  {
+.well {
 	background-color: transparent;
+}
+
+footer {
+	border-top: #E9E9E9;
+	background-color: #E5E5E5;
+	margin-top: 20px;
+	padding-top: 20px;
+	margin-bottom: 10px;
+}
+
+.fb-post {
+	margin-bottom: 10px;
 }

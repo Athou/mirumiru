@@ -4,8 +4,10 @@
 <head>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <title wicket:id="title"></title>
-<link href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do'
+	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans'
+	rel='stylesheet' type='text/css'>
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss" />
 
@@ -27,33 +29,67 @@
 <![endif]-->
 </head>
 <body>
-	<div class="container">
-		<div wicket:id="locale" class="pull-right flags">
-			<a href="#" wicket:id="link"></a>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<div>
+					<a href="#" wicket:id="logo-link" class="center logo-text">
+						Miru Miru
+						<span class="logo-text-chapo">^^</span>
+					</a>
+				</div>
+				<div wicket:id="locale" class="pull-right flags">
+					<a href="#" wicket:id="link"></a>
+				</div>
+				<div class="center menu-entries">
+					<span wicket:id="menu-entry" class="menu-entry">
+						<a href="#" wicket:id="link">
+							<span wicket:id="name"></span>
+						</a>
+					</span>
+				</div>
+			</div>
 		</div>
-		<a href="#" wicket:id="logo-link" class="logo-text">Miru Miru <span class="logo-text-chapo">^^</span></a>
 	</div>
 
 	<div class="container">
 		<div class="row">
-			<div class="span3">
-				<div class="well sidebar-nav">
-					<ul wicket:id="nav-headers" class="nav nav-list">
-					</ul>
-					<iframe
-						src="http://www.facebook.com/plugins/likebox.php?href=http://www.facebook.com/pages/Miru-Miru/127903530580737&amp;width=240&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=true&amp;height=62"
-						scrolling="no" frameborder="0"
-						style="border: none; overflow: hidden; width: 240px; height: 62px;"
-						allowtransparency="true" class="facebooklike"></iframe>
-				</div>
-			</div>
-
-			<div class="span9">
+			<div class="span12">
 				<wicket:child />
-				<footer class="footer">
-				</footer>
 			</div>
 		</div>
 	</div>
+	<footer>
+        <div class="container">
+        <div class="row">
+	        <div class="span3">
+	        	<h3><wicket:message key="facebook.feed" /></h3> 
+	        	<div wicket:id="fb-post" class="fb-post">
+	        		<span wicket:id="fb-content"></span>
+	        		<a href="#" wicket:id="fb-link">
+	        			<span wicket:id="fb-postdate"></span>
+	        		</a>
+	        	</div>
+			</div>
+          <div class="span3">
+            <h3>Latest Blog Posts</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit nisl ac metus porta placerat. Donec semper consectetur neque eget hendrerit. <a href="http://www.littlesparkvt.com">Read More&gt;</a></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit nisl ac metus porta placerat. Donec semper consectetur neque eget hendrerit. <a href="http://www.littlesparkvt.com">Read More&gt;</a></p>
+          </div>
+          <div class="span3">
+            <h3>Contact Us!</h3>
+                <p>Have a question? We can help you!</p>
+                <br>by phone: 1-(555)-555-5555 
+                <br>by mail: info@littlesparkvt.com
+                <br>or by our: <a href="contact.htm">Contact Page</a>
+          </div>
+          <div class="span3">
+            <h3>Facebook</h3>
+					<iframe	src="http://www.facebook.com/plugins/likebox.php?href=http://www.facebook.com/pages/Miru-Miru/127903530580737&amp;width=240&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=true&amp;height=62"	
+					scrolling="no" frameborder="0"	style="border: none; overflow: hidden; width: 240px; height: 62px;"	allowtransparency="true" class="facebooklike"></iframe>
+          </div>
+        </div>
+      </div>
+      </footer>
 </body>
 </html>
