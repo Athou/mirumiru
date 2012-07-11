@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.AbstractReadOnlyModel;
+import org.apache.wicket.model.ResourceModel;
 
 import fr.mirumiru.pages.TemplatePage;
 import fr.mirumiru.pages.TemplatePage.PageModel;
@@ -27,7 +28,7 @@ public class NavigationItem extends Panel {
 				"a", page.getPageClass());
 		add(pageLink);
 
-		pageLink.add(new Label("link-name", page.getName()));
+		pageLink.add(new Label("link-name", new ResourceModel(page.getName())));
 
 	}
 }

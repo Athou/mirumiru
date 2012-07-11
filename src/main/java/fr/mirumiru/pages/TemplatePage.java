@@ -1,7 +1,6 @@
 package fr.mirumiru.pages;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -68,13 +67,13 @@ public abstract class TemplatePage extends WebPage {
 
 	protected void addNavigationMenu() {
 		Multimap<String, PageModel> pages = LinkedListMultimap.create();
-		pages.put("Home", new PageModel("Home Page", HomePage.class));
-		pages.put("Home", new PageModel("News", NewsPage.class));
+		pages.put("home", new PageModel("homepage", HomePage.class));
+		pages.put("home", new PageModel("news", NewsPage.class));
 
-		pages.put("Pictures", new PageModel("Albums", GalleryListPage.class));
+		pages.put("pictures", new PageModel("albums", GalleryListPage.class));
 
-		pages.put("Miru Miru", new PageModel("About", AboutPage.class));
-		pages.put("Miru Miru", new PageModel("Contact", ContactPage.class));
+		pages.put("mirumiru", new PageModel("about", AboutPage.class));
+		pages.put("mirumiru", new PageModel("contact", ContactPage.class));
 
 		RepeatingView repeatingView = new RepeatingView("nav-headers");
 		for (String category : pages.keySet()) {

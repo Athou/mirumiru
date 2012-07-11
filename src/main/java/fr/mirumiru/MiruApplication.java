@@ -12,6 +12,7 @@ import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.IRequestMapper;
 
 import fr.mirumiru.auth.LoginPage;
 import fr.mirumiru.auth.LogoutPage;
@@ -24,6 +25,7 @@ import fr.mirumiru.pages.NewsPage;
 import fr.mirumiru.pages.admin.AdminHomePage;
 import fr.mirumiru.pages.admin.AdminNewsEditPage;
 import fr.mirumiru.pages.admin.AdminNewsListPage;
+import fr.mirumiru.utils.locale.LocaleFirstMapper;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 
@@ -34,6 +36,10 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		super.init();
 		mountPages();
 		getMarkupSettings().setStripWicketTags(true);
+
+		IRequestMapper localeFirstMapper = new LocaleFirstMapper(
+				getRootRequestMapperAsCompound());
+		setRootRequestMapper(localeFirstMapper);
 
 		try {
 			beanManager = (BeanManager) new InitialContext()
@@ -46,8 +52,8 @@ public class MiruApplication extends AuthenticatedWebApplication {
 
 	private void mountPages() {
 		mountPage("/news/#{id}", NewsPage.class);
-		mountPage("/gallery", GalleryListPage.class);
-		
+		mountPage("/albums", GalleryListPage.class);
+
 		mountPage("/about", AboutPage.class);
 		mountPage("/contact", ContactPage.class);
 
