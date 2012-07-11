@@ -31,7 +31,7 @@ public class ContactPage extends TemplatePage {
 					getBean(MailService.class).sendMail(name, email, message);
 					info("Message sent successfully !");
 				} catch (Exception e) {
-					log.error("Could not send email", e);
+					getLog().error("Could not send email", e);
 					error("Could not send email");
 				}
 			}
