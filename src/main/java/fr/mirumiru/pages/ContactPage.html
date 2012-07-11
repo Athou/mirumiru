@@ -3,12 +3,14 @@
 	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
 <body>
 	<wicket:extend>
-		<div class="page-header">
-			<h1>Contact</h1>
+		<div class="well">
+			<div class="page-header">
+				<h1>Contact</h1>
+			</div>
 
 			<div wicket:id="feedback" />
 			
-			<form wicket:id="form" class="well" method="post">
+			<form wicket:id="form">
 				<div class="control-group">
 					<label class="control-label" for="name"><wicket:message key="name"/></label>
 					<div class="controls">

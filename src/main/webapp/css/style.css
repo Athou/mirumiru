@@ -1,3 +1,24 @@
+body {
+	background-image: url('../images/pattern.gif');
+}
+
+.logo-text {
+	font-family: 'Nothing You Could Do', cursive;
+	font-size: 80px;
+	color: black;
+	display: block;
+	margin: 50px 0 40px 0;
+}
+
+.logo-text,.logo-text:hover,.logo-text:visited {
+	text-decoration: none;
+	color: black;
+}
+
+.logo-text-chapo {
+	color: #FF266C;
+}
+
 .center {
 	margin-left: auto;
 	margin-right: auto;
@@ -43,4 +64,9 @@ div.thumbnail:hover {
 	-webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 	-moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 	box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+/* Bootstrap customization */
+.well  {
+	background-color: transparent;
 }

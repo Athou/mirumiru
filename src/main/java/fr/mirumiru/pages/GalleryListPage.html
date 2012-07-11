@@ -3,22 +3,26 @@
 	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
 <body>
 	<wicket:extend>
-		<div class="page-header">
-			<h1><wicket:message key="albums"/></h1>
-		</div>
-		<ul class="thumbnails gallery">
-			<li class="span3" wicket:id="albums">
-				<div class="thumbnail center">
-					<a href="#" wicket:id="link" target="_blank">
-		            	<img src="#" wicket:id="coverPhoto" />
-	            	</a>
-					<div class="caption">
-						<h5><span wicket:id="name" /></h5>
-						<h5><small><span wicket:id="count" /> photos</small></h5>
-					</div>
+		<div class="row">
+			<div class="span9 well">
+				<div class="page-header">
+					<h1><wicket:message key="albums"/></h1>
 				</div>
-			</li>
-		</ul>
+				<ul class="thumbnails gallery">
+					<li class="span3" wicket:id="albums">
+						<div class="thumbnail center">
+							<a href="#" wicket:id="link" target="_blank">
+				            	<img src="#" wicket:id="coverPhoto" />
+			            	</a>
+							<div class="caption">
+								<h5><span wicket:id="name" /></h5>
+								<h5><small><span wicket:id="count" /> photos</small></h5>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</wicket:extend>
 </body>
 </html>
