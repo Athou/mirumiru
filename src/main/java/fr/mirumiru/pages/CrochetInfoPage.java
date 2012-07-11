@@ -2,6 +2,8 @@ package fr.mirumiru.pages;
 
 public class CrochetInfoPage extends TemplatePage {
 
+	private static final long serialVersionUID = -197179143378330195L;
+
 	public CrochetInfoPage() {
 
 	}
