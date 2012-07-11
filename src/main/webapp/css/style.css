@@ -1,5 +1,6 @@
 body {
 	background-image: url('../images/pattern.gif');
+	font-family: 'Droid Sans', sans-serif !important;
 }
 
 .logo-text {
