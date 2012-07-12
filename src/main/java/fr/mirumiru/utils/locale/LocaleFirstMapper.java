@@ -11,6 +11,8 @@ import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Url;
 
+import fr.mirumiru.utils.WicketUtils;
+
 public class LocaleFirstMapper implements IRequestMapper {
 
 	private final IRequestMapper chain;
@@ -45,7 +47,8 @@ public class LocaleFirstMapper implements IRequestMapper {
 		Url url = chain.mapHandler(handler);
 		if (url != null) {
 			Locale locale = Session.get().getLocale();
-			if (locale == null) {
+			if (locale == null
+					|| !WicketUtils.Language.isLocaleSupported(locale)) {
 				locale = Locale.FRENCH;
 			}
 			url.getSegments().add(0, locale.getLanguage());

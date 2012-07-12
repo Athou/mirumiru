@@ -2,6 +2,7 @@ package fr.mirumiru.utils;
 
 import java.util.Locale;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class WicketUtils {
@@ -23,6 +24,18 @@ public class WicketUtils {
 
 		public Locale getLocale() {
 			return locale;
+		}
+
+		public static boolean isLocaleSupported(Locale locale) {
+			boolean supported = false;
+			for (Language l : values()) {
+				if (StringUtils.equals(locale.getLanguage(), l.getLocale()
+						.getLanguage())) {
+					supported = true;
+					break;
+				}
+			}
+			return supported;
 		}
 	}
 
