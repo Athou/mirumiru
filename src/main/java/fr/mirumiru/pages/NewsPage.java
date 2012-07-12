@@ -13,7 +13,7 @@ import fr.mirumiru.services.NewsDAO.NextAndPrevious;
 import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
-public class NewsPage extends TemplatePage {
+public class NewsPage extends ContentPage {
 
 	private long id;
 

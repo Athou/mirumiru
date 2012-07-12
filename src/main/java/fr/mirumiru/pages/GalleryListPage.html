@@ -4,25 +4,30 @@
 <body>
 	<wicket:extend>
 		<div class="row">
-			<div class="span12">
-				<div class="page-header">
-					<h1><wicket:message key="albums"/></h1>
-				</div>
-				<ul class="thumbnails gallery">
-					<li class="span3" wicket:id="albums">
-						<div class="thumbnail center">
-							<a href="#" wicket:id="link" target="_blank">
-				            	<img src="#" wicket:id="coverPhoto" />
-			            	</a>
-							<div class="caption">
-								<h5><span wicket:id="name" /></h5>
-								<h5><small><span wicket:id="count" /> photos</small></h5>
-							</div>
-						</div>
-					</li>
-				</ul>
+			<div class="page-header">
+				<h1><wicket:message key="albums"/></h1>
 			</div>
+			<ul class="thumbnails gallery">
+				<li class="span2" wicket:id="albums">
+					<div class="thumbnail center">
+						<a href="#" wicket:id="link" target="_blank">
+			            	<img src="#" wicket:id="coverPhoto" />
+		            	</a>
+						<div class="caption">
+							<h5><span wicket:id="name" /></h5>
+							<h5><small><span wicket:id="count" /> photos</small></h5>
+						</div>
+					</div>
+				</li>
+			</ul>
 		</div>
+		<script type="text/javascript">
+			$(function(){
+				var divs = $('div.thumbnail');
+				var maxHeight = Math.max.apply(Math, divs.map(function(){ return $(this).height(); }).get());
+				divs.height(maxHeight);
+			});
+		</script>
 	</wicket:extend>
 </body>
 </html>

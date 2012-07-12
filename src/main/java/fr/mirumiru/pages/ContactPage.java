@@ -13,7 +13,7 @@ import fr.mirumiru.services.MailService;
 import fr.mirumiru.utils.BootstrapFeedbackPanel;
 
 @SuppressWarnings("serial")
-public class ContactPage extends TemplatePage {
+public class ContactPage extends ContentPage {
 
 	private String name;
 	private String email;

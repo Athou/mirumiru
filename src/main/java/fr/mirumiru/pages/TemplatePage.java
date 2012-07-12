@@ -1,6 +1,5 @@
 package fr.mirumiru.pages;
 
-import java.text.DateFormat;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,7 +8,6 @@ import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.link.StatelessLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -24,6 +22,7 @@ import com.restfb.types.Post;
 
 import fr.mirumiru.MiruApplication;
 import fr.mirumiru.auth.MiruSession;
+import fr.mirumiru.components.FacebookPost;
 import fr.mirumiru.services.FacebookService;
 import fr.mirumiru.utils.WicketUtils;
 import fr.mirumiru.utils.WicketUtils.Language;
@@ -76,7 +75,7 @@ public abstract class TemplatePage extends WebPage {
 		List<PageModel> pages = Lists.newArrayList();
 		pages.add(new PageModel("home", HomePage.class));
 		pages.add(new PageModel("about", AboutPage.class));
-		pages.add(new PageModel("news", NewsPage.class));
+		pages.add(new PageModel("news", FacebookNewsPage.class));
 		pages.add(new PageModel("crochet", CrochetInfoPage.class));
 		pages.add(new PageModel("albums", GalleryListPage.class));
 		pages.add(new PageModel("faq", FAQPage.class));
@@ -110,34 +109,25 @@ public abstract class TemplatePage extends WebPage {
 		LoadableDetachableModel<List<Post>> model = new LoadableDetachableModel<List<Post>>() {
 			@Override
 			protected List<Post> load() {
-				return getBean(FacebookService.class).getPosts();
+				List<Post> posts = getBean(FacebookService.class).getPosts();
+				if (posts.size() > 2) {
+					posts = posts.subList(0, 2);
+				}
+				return posts;
 			}
 		};
 
-		ListView<Post> posts = new ListView<Post>("fb-post", model) {
+		ListView<Post> posts = new ListView<Post>("fb-posts", model) {
 			@Override
 			protected void populateItem(ListItem<Post> item) {
 				Post post = item.getModelObject();
-
-				String message = post.getMessage();
-				int max = 100;
-				if (message.length() > max) {
-					message = message.substring(0, max - 1) + "...";
-				}
-				DateFormat dateFormat = DateFormat.getDateInstance(
-						DateFormat.SHORT, getSession().getLocale());
-
-				item.add(new Label("fb-content", message));
-				String[] parts = post.getId().split("_");
-				ExternalLink link = new ExternalLink("fb-link",
-						"http://www.facebook.com/" + parts[0] + "/posts/"
-								+ parts[1]);
-				item.add(link);
-				link.add(new Label("fb-postdate", dateFormat.format(post
-						.getCreatedTime())));
+				item.add(new FacebookPost("post", post, 85));
 			}
 		};
 		add(posts);
+
+		add(new BookmarkablePageLink<TemplatePage>("more-news",
+				FacebookNewsPage.class));
 	}
 
 	protected abstract String getTitle();

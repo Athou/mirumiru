@@ -1,6 +1,6 @@
 package fr.mirumiru.pages;
 
-public class FAQPage extends TemplatePage {
+public class FAQPage extends ContentPage {
 
 	private static final long serialVersionUID = 2354826787598549057L;
 

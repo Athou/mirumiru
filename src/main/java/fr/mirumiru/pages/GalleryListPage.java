@@ -16,7 +16,7 @@ import com.restfb.types.Album;
 import fr.mirumiru.services.FacebookService;
 
 @SuppressWarnings("serial")
-public class GalleryListPage extends TemplatePage {
+public class GalleryListPage extends ContentPage {
 
 	public GalleryListPage() {
 
