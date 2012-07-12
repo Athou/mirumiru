@@ -10,7 +10,7 @@ public class CrochetInfoPage extends ContentPage {
 
 	@Override
 	protected String getTitle() {
-		return "About";
+		return "crochet";
 	}
 
 }

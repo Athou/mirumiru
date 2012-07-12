@@ -10,7 +10,7 @@ public class FAQPage extends ContentPage {
 
 	@Override
 	protected String getTitle() {
-		return "About";
+		return "faq";
 	}
 
 }

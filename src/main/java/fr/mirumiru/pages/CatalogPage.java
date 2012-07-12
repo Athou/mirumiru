@@ -1,12 +1,15 @@
 package fr.mirumiru.pages;
 
-
 @SuppressWarnings("serial")
-public class HomePage extends TemplatePage {
+public class CatalogPage extends ContentPage {
+
+	public CatalogPage() {
+		
+	}
 
 	@Override
 	protected String getTitle() {
-		return "mirumiru";
+		return "plushes";
 	}
 
 }

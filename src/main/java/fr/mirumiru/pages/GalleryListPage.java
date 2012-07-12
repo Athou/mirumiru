@@ -49,7 +49,7 @@ public class GalleryListPage extends ContentPage {
 
 	@Override
 	protected String getTitle() {
-		return "Gallery";
+		return "albums";
 	}
 
 }

@@ -77,6 +77,6 @@ public class FacebookNewsPage extends ContentPage {
 
 	@Override
 	protected String getTitle() {
-		return "News";
+		return "news";
 	}
 }

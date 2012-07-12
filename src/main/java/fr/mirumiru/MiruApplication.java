@@ -18,6 +18,7 @@ import fr.mirumiru.auth.LoginPage;
 import fr.mirumiru.auth.LogoutPage;
 import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.pages.AboutPage;
+import fr.mirumiru.pages.CatalogPage;
 import fr.mirumiru.pages.ContactPage;
 import fr.mirumiru.pages.CrochetInfoPage;
 import fr.mirumiru.pages.FAQPage;
@@ -55,6 +56,7 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	private void mountPages() {
 		mountPage("/about", AboutPage.class);
 		mountPage("/news/#{page}", FacebookNewsPage.class);
+		mountPage("/plushes", CatalogPage.class);
 		mountPage("/crochet", CrochetInfoPage.class);
 		mountPage("/albums", GalleryListPage.class);
 		mountPage("/faq", FAQPage.class);

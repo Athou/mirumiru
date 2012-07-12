@@ -66,6 +66,6 @@ public class NewsPage extends ContentPage {
 
 	@Override
 	protected String getTitle() {
-		return "News";
+		return "news";
 	}
 }

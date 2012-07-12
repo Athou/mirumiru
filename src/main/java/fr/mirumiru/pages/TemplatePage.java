@@ -3,6 +3,7 @@ package fr.mirumiru.pages;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebPage;
@@ -32,7 +33,7 @@ public abstract class TemplatePage extends WebPage {
 
 	public TemplatePage() {
 
-		add(new Label("title", getTitle()));
+		add(new Label("title", getLocalizedString(getTitle(), getTitle())));
 		add(new BookmarkablePageLink<HomePage>("logo-link", HomePage.class));
 		addNavigationMenu();
 		addFacebookPosts();
@@ -76,6 +77,7 @@ public abstract class TemplatePage extends WebPage {
 		pages.add(new PageModel("home", HomePage.class));
 		pages.add(new PageModel("about", AboutPage.class));
 		pages.add(new PageModel("news", FacebookNewsPage.class));
+		pages.add(new PageModel("plushes", CatalogPage.class));
 		pages.add(new PageModel("crochet", CrochetInfoPage.class));
 		pages.add(new PageModel("albums", GalleryListPage.class));
 		pages.add(new PageModel("faq", FAQPage.class));
@@ -163,5 +165,14 @@ public abstract class TemplatePage extends WebPage {
 
 	public Logger getLog() {
 		return Logger.getLogger(getClass());
+	}
+
+	public String getLocalizedString(String key) {
+		return getLocalizedString(key, null);
+	}
+
+	public String getLocalizedString(String key, String defaultValue) {
+		return Application.get().getResourceSettings().getLocalizer()
+				.getString(key, this, defaultValue);
 	}
 }

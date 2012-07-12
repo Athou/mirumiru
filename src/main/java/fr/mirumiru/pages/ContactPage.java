@@ -49,7 +49,7 @@ public class ContactPage extends ContentPage {
 
 	@Override
 	protected String getTitle() {
-		return "Contact";
+		return "contact";
 	}
 
 }
