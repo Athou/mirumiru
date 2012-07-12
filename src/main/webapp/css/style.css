@@ -39,6 +39,10 @@ body {
 	display: block;
 }
 
+.carousel-control {
+	top: 50%;
+}
+
 .flags a {
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -61,7 +65,8 @@ body {
 }
 
 .menu-entry a {
-	font-size: large; padding : 9px 20px 0 20px;
+	font-size: large;
+	padding: 9px 20px 0 20px;
 	color: #999;
 	text-decoration: none;
 	padding: 9px 20px 0 20px;

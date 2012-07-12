@@ -3,11 +3,38 @@
 	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
 <body>
 	<wicket:extend>
-		<div class="center">
-			<img src="images/homepage_logo.jpg" />
-			<h2>Website in progress</h2>
-			Welcome to Miru Miru. The website is currently in progress, we are working hard to make it as friendly as possible.
+		<div>
+			<div id="carousel" class="span7 carousel slide center">
+				<div class="carousel-inner">
+					<div class="active item">
+						<img src="images/homepage_carousel1.jpg" />
+					</div>
+					<div class="item">
+						<img src="images/homepage_carousel2.jpg" />
+					</div>
+					<div class="item">
+						<img src="images/homepage_carousel3.jpg" />
+					</div>
+					<div class="item">
+						<img src="images/homepage_carousel4.jpg" />
+					</div>
+					<div class="item">
+						<img src="images/homepage_carousel5.jpg" />
+					</div>
+				</div>
+				<a class="carousel-control left" href="#carousel"
+					data-slide="prev">&lsaquo;</a>
+				<a class="carousel-control right" href="#carousel"
+					data-slide="next">&rsaquo;</a>
+			</div>
+			<div class="span5">
+				<h2><wicket:message key="home.welcome1" /></h2>
+					<wicket:message key="home.welcome2" />
+			 </div>
 		</div>
+		<script type="text/javascript">
+			$(".carousel").carousel()
+		</script>
 	</wicket:extend>
 </body>
 </html>
