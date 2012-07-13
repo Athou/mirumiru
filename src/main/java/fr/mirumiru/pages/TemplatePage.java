@@ -16,7 +16,6 @@ import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.model.ResourceModel;
 
 import com.google.common.collect.Lists;
 import com.restfb.types.Post;
