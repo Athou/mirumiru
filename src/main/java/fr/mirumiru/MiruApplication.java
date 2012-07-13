@@ -26,8 +26,6 @@ import fr.mirumiru.pages.FacebookNewsPage;
 import fr.mirumiru.pages.GalleryListPage;
 import fr.mirumiru.pages.HomePage;
 import fr.mirumiru.pages.admin.AdminHomePage;
-import fr.mirumiru.pages.admin.AdminNewsEditPage;
-import fr.mirumiru.pages.admin.AdminNewsListPage;
 import fr.mirumiru.utils.locale.LocaleFirstMapper;
 
 public class MiruApplication extends AuthenticatedWebApplication {
@@ -38,7 +36,6 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	protected void init() {
 		super.init();
 		mountPages();
-		getMarkupSettings().setStripWicketTags(true);
 
 		IRequestMapper localeFirstMapper = new LocaleFirstMapper(
 				getRootRequestMapperAsCompound());
@@ -65,9 +62,7 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		mountPage("/login", LoginPage.class);
 		mountPage("/logout", LogoutPage.class);
 
-		// mountPage("/admin", AdminHomePage.class);
-		// mountPage("/admin/news", AdminNewsListPage.class);
-		// mountPage("/admin/news/edit/#{id}", AdminNewsEditPage.class);
+		mountPage("/admin", AdminHomePage.class);
 
 	}
 

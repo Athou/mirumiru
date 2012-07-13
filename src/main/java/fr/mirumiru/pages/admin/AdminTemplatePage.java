@@ -1,28 +1,23 @@
 package fr.mirumiru.pages.admin;
 
+import java.util.List;
+
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
-import org.apache.wicket.markup.repeater.RepeatingView;
 
-import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.Lists;
 
 import fr.mirumiru.pages.TemplatePage;
 
 @SuppressWarnings("serial")
 @AuthorizeInstantiation(Roles.ADMIN)
 public abstract class AdminTemplatePage extends TemplatePage {
-	@Override
-	protected void addNavigationMenu() {
-		Multimap<String, PageModel> pages = LinkedListMultimap.create();
-		pages.put("News", new PageModel("News", AdminNewsListPage.class));
 
-		RepeatingView repeatingView = new RepeatingView("nav-headers");
-		// TODO menu for admin
-		// for (String category : pages.keySet()) {
-		// repeatingView.add(new Label(repeatingView.newChildId(),
-		// category, pages.get(category)));
-		// }
-		add(repeatingView);
+	@Override
+	protected List<PageModel> getPages() {
+		List<PageModel> pages = Lists.newArrayList();
+		pages.add(new PageModel("Admin Home", AdminHomePage.class));
+		return pages;
 	}
+
 }

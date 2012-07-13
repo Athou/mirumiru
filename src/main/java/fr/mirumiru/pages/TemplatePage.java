@@ -72,7 +72,7 @@ public abstract class TemplatePage extends WebPage {
 
 	}
 
-	protected void addNavigationMenu() {
+	protected List<PageModel> getPages() {
 		List<PageModel> pages = Lists.newArrayList();
 		pages.add(new PageModel("home", HomePage.class));
 		pages.add(new PageModel("about", AboutPage.class));
@@ -82,16 +82,20 @@ public abstract class TemplatePage extends WebPage {
 		pages.add(new PageModel("albums", GalleryListPage.class));
 		pages.add(new PageModel("faq", FAQPage.class));
 		pages.add(new PageModel("contact", ContactPage.class));
+		return pages;
+	}
+
+	protected void addNavigationMenu() {
 
 		ListView<PageModel> entries = new ListView<PageModel>("menu-entry",
-				pages) {
+				getPages()) {
 			@Override
 			protected void populateItem(ListItem<PageModel> item) {
 				PageModel model = item.getModelObject();
 				BookmarkablePageLink<TemplatePage> link = new BookmarkablePageLink<TemplatePage>(
 						"link", model.getPageClass());
 				item.add(link);
-				link.add(new Label("name", new ResourceModel(model.getName())));
+				link.add(new Label("name", getLocalizedString(model.getName(), model.getName())));
 				final Class<? extends TemplatePage> pageClass = model
 						.getPageClass();
 				link.add(new AttributeModifier("class",
