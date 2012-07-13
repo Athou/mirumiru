@@ -1,11 +1,9 @@
 package fr.mirumiru.services;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Schedule;
@@ -70,14 +68,11 @@ public class FacebookService {
 	private class FacebookCache {
 
 		private List<Album> albums;
-		private long validUntil = 0;
 		private List<Post> posts;
 
 		public FacebookCache(List<Album> albums, List<Post> posts) {
 			this.albums = albums;
 			this.posts = posts;
-			validUntil = Calendar.getInstance().getTimeInMillis()
-					+ TimeUnit.HOURS.toMillis(1);
 		}
 
 		public List<Album> getAlbums() {
