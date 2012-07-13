@@ -1,12 +1,40 @@
 <portfolio>
+
+	<!-- Original -->
 	<item image="petit_poulpe.jpg">
 		<name lang="en" name="Small Octopus" />
 		<name lang="fr" name="Petit Poulpe" />
 	</item>
-	<item image="mini_caca.jpg">
-		<name lang="en" name="Mini Poo" />
-		<name lang="fr" name="Petit Caca" />
+	<item image="poulpe.jpg">
+		<name lang="en" name="Octopus" />
+		<name lang="fr" name="Poulpe" />
 	</item>
+	<item image="poo.jpg">
+		<name lang="en" name="Poo" />
+		<name lang="fr" name="Caca" />
+	</item>
+	<item image="bitokun.jpg">
+		<name lang="en" name="Bitokun" />
+		<name lang="fr" name="Bitokun" />
+	</item>
+	<item image="lapitrou.jpg">
+		<name lang="en" name="Bunny" />
+		<name lang="fr" name="Lapitrou" />
+	</item>
+	<item image="cupcake.jpg">
+		<name lang="en" name="Cupcake" />
+		<name lang="fr" name="Cupcake" />
+	</item>
+	<item image="panda.jpg">
+		<name lang="en" name="Panda" />
+		<name lang="fr" name="Panda" />
+	</item>
+	<item image="panda_demon.jpg">
+		<name lang="en" name="Demon Panda" />
+		<name lang="fr" name="panda Démon" />
+	</item>
+
+	<!-- Games -->
 	<item image="bo_bomb.jpg">
 		<name lang="en" name="Bo-Bomb" />
 		<name lang="fr" name="Bo-Bomb" />
@@ -14,5 +42,39 @@
 	<item image="bo_bomb_xl.jpg">
 		<name lang="en" name="Bo-Bomb XL" />
 		<name lang="fr" name="Bo-Bomb XL" />
+	</item>
+	<item image="maskass.jpg">
+		<name lang="en" name="Shy Guy" />
+		<name lang="fr" name="Maskass" />
+	</item>
+	<item image="luma.jpg">
+		<name lang="en" name="Luma" />
+		<name lang="fr" name="Luma" />
+	</item>
+	<item image="marioflower.jpg">
+		<name lang="en" name="Flower (Super Mario)" />
+		<name lang="fr" name="Flower (Super Mario)" />
+	</item>
+
+	<!-- Misc -->
+	<item image="totoro.jpg">
+		<name lang="en" name="Totoro" />
+		<name lang="fr" name="Totoro" />
+	</item>
+	<item image="gome.jpg">
+		<name lang="en" name="Gome" />
+		<name lang="fr" name="Gome" />
+	</item>
+	<item image="brainslug.jpg">
+		<name lang="en" name="Brain Slug (Futurama)" />
+		<name lang="fr" name="Suceur de cerveau (Futurama)" />
+	</item>
+	<item image="sam.jpg">
+		<name lang="en" name="Sam (Sam &amp; Max)" />
+		<name lang="fr" name="Sam (Sam &amp; Max)" />
+	</item>
+	<item image="violet.jpg">
+		<name lang="en" name="Purple (Day of the Tentacle)" />
+		<name lang="fr" name="Violet (Day of the Tentacle)" />
 	</item>
 </portfolio>
