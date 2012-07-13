@@ -76,7 +76,7 @@ public abstract class TemplatePage extends WebPage {
 		pages.add(new PageModel("home", HomePage.class));
 		pages.add(new PageModel("about", AboutPage.class));
 		pages.add(new PageModel("news", FacebookNewsPage.class));
-		pages.add(new PageModel("plushes", CatalogPage.class));
+		pages.add(new PageModel("portfolio", PortfolioPage.class));
 		pages.add(new PageModel("crochet", CrochetInfoPage.class));
 		pages.add(new PageModel("albums", GalleryListPage.class));
 		pages.add(new PageModel("faq", FAQPage.class));

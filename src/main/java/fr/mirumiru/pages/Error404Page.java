@@ -1,15 +1,10 @@
 package fr.mirumiru.pages;
 
 @SuppressWarnings("serial")
-public class CatalogPage extends ContentPage {
-
-	public CatalogPage() {
-		
-	}
+public class Error404Page extends ContentPage {
 
 	@Override
 	protected String getTitle() {
-		return "plushes";
+		return "404";
 	}
-
 }
