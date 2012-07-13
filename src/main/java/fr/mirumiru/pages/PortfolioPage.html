@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<body>
+	<wicket:extend>
+		<div class="row">
+			<div class="page-header">
+				<h1><wicket:message key="portfolio"/></h1>
+			</div>
+			<ul class="thumbnails gallery">
+				<li class="span2" wicket:id="product">
+					<div class="thumbnail center">
+						<a href="#" wicket:id="link" rel="lightbox[portfolio]">
+			            	<img src="#" wicket:id="image" />
+		            	</a>
+						<div class="caption">
+							<h5><span wicket:id="name" /></h5>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				var divs = $('div.thumbnail');
+				var maxHeight = Math.max.apply(Math, divs.map(function(){ return $(this).height(); }).get());
+				divs.height(maxHeight);
+			});
+		</script>
+	</wicket:extend>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<portfolio>
+	<item image="petit_poulpe.jpg">
+		<name lang="en" name="Small Octopus" />
+		<name lang="fr" name="Petit Poulpe" />
+	</item>
+	<item image="mini_caca.jpg">
+		<name lang="en" name="Mini Poo" />
+		<name lang="fr" name="Petit Caca" />
+	</item>
+	<item image="bo_bomb.jpg">
+		<name lang="en" name="Bo-Bomb" />
+		<name lang="fr" name="Bo-Bomb" />
+	</item>
+	<item image="bo_bomb_xl.jpg">
+		<name lang="en" name="Bo-Bomb XL" />
+		<name lang="fr" name="Bo-Bomb XL" />
+	</item>
+</portfolio>

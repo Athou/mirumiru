@@ -86,15 +86,22 @@ public abstract class TemplatePage extends WebPage {
 
 	protected void addNavigationMenu() {
 
+		IModel<List<PageModel>> model = new LoadableDetachableModel<List<PageModel>>() {
+			protected java.util.List<PageModel> load() {
+				return getPages();
+			}
+		};
+
 		ListView<PageModel> entries = new ListView<PageModel>("menu-entry",
-				getPages()) {
+				model) {
 			@Override
 			protected void populateItem(ListItem<PageModel> item) {
 				PageModel model = item.getModelObject();
 				BookmarkablePageLink<TemplatePage> link = new BookmarkablePageLink<TemplatePage>(
 						"link", model.getPageClass());
 				item.add(link);
-				link.add(new Label("name", getLocalizedString(model.getName(), model.getName())));
+				link.add(new Label("name", getLocalizedString(model.getName(),
+						model.getName())));
 				final Class<? extends TemplatePage> pageClass = model
 						.getPageClass();
 				link.add(new AttributeModifier("class",
