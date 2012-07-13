@@ -31,7 +31,7 @@
 	</item>
 	<item image="panda_demon.jpg">
 		<name lang="en" name="Demon Panda" />
-		<name lang="fr" name="panda Démon" />
+		<name lang="fr" name="Panda Démon" />
 	</item>
 
 	<!-- Games -->
@@ -52,8 +52,8 @@
 		<name lang="fr" name="Luma" />
 	</item>
 	<item image="marioflower.jpg">
-		<name lang="en" name="Flower (Super Mario)" />
-		<name lang="fr" name="Flower (Super Mario)" />
+		<name lang="en" name="Flower" desc="Super Mario" />
+		<name lang="fr" name="Fleur" desc="Super Mario" />
 	</item>
 
 	<!-- Misc -->
@@ -62,19 +62,19 @@
 		<name lang="fr" name="Totoro" />
 	</item>
 	<item image="gome.jpg">
-		<name lang="en" name="Gome" />
-		<name lang="fr" name="Gome" />
+		<name lang="en" name="Gome" desc="Dragon Quest" />
+		<name lang="fr" name="Gome" desc="Fly" />
 	</item>
 	<item image="brainslug.jpg">
-		<name lang="en" name="Brain Slug (Futurama)" />
-		<name lang="fr" name="Suceur de cerveau (Futurama)" />
+		<name lang="en" name="Brain Slug" desc="Futurama" />
+		<name lang="fr" name="Suceur de cerveau" desc="Futurama" />
 	</item>
 	<item image="sam.jpg">
-		<name lang="en" name="Sam (Sam &amp; Max)" />
-		<name lang="fr" name="Sam (Sam &amp; Max)" />
+		<name lang="en" name="Sam" desc="Sam &amp; Max" />
+		<name lang="fr" name="Sam" desc="Sam &amp; Max" />
 	</item>
 	<item image="violet.jpg">
-		<name lang="en" name="Purple (Day of the Tentacle)" />
-		<name lang="fr" name="Violet (Day of the Tentacle)" />
+		<name lang="en" name="Purple" desc="Day of the Tentacle" />
+		<name lang="fr" name="Violet" desc="Day of the Tentacle" />
 	</item>
 </portfolio>

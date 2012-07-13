@@ -51,6 +51,17 @@ public class Portfolio {
 			return result;
 		}
 
+		public String getDescription(String lang) {
+			String result = null;
+			for (PortfolioName name : getNames()) {
+				if (StringUtils.equals(lang, name.getLang())) {
+					result = name.getDescription();
+					break;
+				}
+			}
+			return result;
+		}
+
 		public String getImage() {
 			return image;
 		}
@@ -81,6 +92,9 @@ public class Portfolio {
 		@XmlAttribute(name = "name")
 		private String name;
 
+		@XmlAttribute(name = "desc")
+		private String description;
+
 		public String getLang() {
 			return lang;
 		}
@@ -95,6 +109,14 @@ public class Portfolio {
 
 		public void setName(String name) {
 			this.name = name;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public void setDescription(String description) {
+			this.description = description;
 		}
 
 	}

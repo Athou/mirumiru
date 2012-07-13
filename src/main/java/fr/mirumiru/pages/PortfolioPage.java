@@ -25,13 +25,16 @@ public class PortfolioPage extends ContentPage {
 			@Override
 			protected void populateItem(ListItem<PortfolioItem> item) {
 				PortfolioItem portfolioItem = item.getModelObject();
-				String imageName = portfolioItem.getName(getSession()
-						.getLocale().getLanguage());
+				String userLang = getSession().getLocale().getLanguage();
+				String imageName = portfolioItem.getName(userLang);
+				String imageDesc = portfolioItem.getDescription(userLang);
 				String imagePath = "../images/portfolio/"
 						+ portfolioItem.getImage();
 				item.add(new Label("name", imageName));
+				item.add(new Label("desc", imageDesc == null ? "" : imageDesc));
 				ExternalLink link = new ExternalLink("link", imagePath);
-				link.add(new AttributeModifier("title", imageName));
+				link.add(new AttributeModifier("title", imageName
+						+ (imageDesc == null ? "" : " (" + imageDesc + ")")));
 				item.add(link);
 				Component image = new WebMarkupContainer("image");
 				image.add(new AttributeModifier("src", imagePath));
