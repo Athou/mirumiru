@@ -54,7 +54,7 @@ public abstract class TemplatePage extends WebPage {
 					@Override
 					public void onClick() {
 						getSession().setLocale(lang.getLocale());
-						setResponsePage(getPage().getClass());
+						setResponsePage(getPage().getClass(), getPageParameters());
 					}
 				};
 				link.add(new AttributeAppender("class", " "
