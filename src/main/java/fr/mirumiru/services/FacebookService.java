@@ -7,10 +7,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Schedule;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
 
 import org.apache.log4j.Logger;
 
@@ -20,6 +21,7 @@ import com.restfb.FacebookClient;
 import com.restfb.types.Album;
 import com.restfb.types.Post;
 
+@Startup
 @Singleton
 public class FacebookService {
 
@@ -31,16 +33,6 @@ public class FacebookService {
 
 	private FacebookCache cache;
 
-	@AroundInvoke
-	public Object refreshIfNeeded(InvocationContext ctx) throws Exception {
-		Object result = null;
-		if (cache == null || !cache.isValid()) {
-			refresh();
-		}
-		result = ctx.proceed();
-		return result;
-	}
-
 	public List<Album> getAlbums() {
 		return cache.getAlbums();
 	}
@@ -49,6 +41,8 @@ public class FacebookService {
 		return cache.getPosts();
 	}
 
+	@Schedule(hour = "*")
+	@PostConstruct
 	private void refresh() {
 		synchronized (this) {
 			log.info("Refreshing album list from Facebook");
@@ -84,10 +78,6 @@ public class FacebookService {
 			this.posts = posts;
 			validUntil = Calendar.getInstance().getTimeInMillis()
 					+ TimeUnit.HOURS.toMillis(1);
-		}
-
-		public boolean isValid() {
-			return Calendar.getInstance().getTimeInMillis() < validUntil;
 		}
 
 		public List<Album> getAlbums() {
