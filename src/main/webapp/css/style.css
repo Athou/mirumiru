@@ -81,11 +81,12 @@ body {
 }
 
 div.thumbnail:hover {
-	border-color: #0088cc;
+	border-color: #222;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 	-moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 	box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
+
 
 /* Bootstrap customization */
 .well {
