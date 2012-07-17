@@ -21,9 +21,11 @@ import com.google.common.collect.Lists;
 import com.restfb.types.Post;
 
 import fr.mirumiru.MiruApplication;
+import fr.mirumiru.MiruPages;
 import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.components.FacebookPost;
 import fr.mirumiru.services.FacebookService;
+import fr.mirumiru.utils.PageModel;
 import fr.mirumiru.utils.WicketUtils;
 import fr.mirumiru.utils.WicketUtils.Language;
 
@@ -54,7 +56,8 @@ public abstract class TemplatePage extends WebPage {
 					@Override
 					public void onClick() {
 						getSession().setLocale(lang.getLocale());
-						setResponsePage(getPage().getClass(), getPageParameters());
+						setResponsePage(getPage().getClass(),
+								getPageParameters());
 					}
 				};
 				link.add(new AttributeAppender("class", " "
@@ -72,16 +75,7 @@ public abstract class TemplatePage extends WebPage {
 	}
 
 	protected List<PageModel> getPages() {
-		List<PageModel> pages = Lists.newArrayList();
-		pages.add(new PageModel("home", HomePage.class));
-		pages.add(new PageModel("about", AboutPage.class));
-		pages.add(new PageModel("news", FacebookNewsPage.class));
-		pages.add(new PageModel("portfolio", PortfolioPage.class));
-		pages.add(new PageModel("crochet", CrochetInfoPage.class));
-		pages.add(new PageModel("albums", GalleryListPage.class));
-		pages.add(new PageModel("faq", FAQPage.class));
-		pages.add(new PageModel("contact", ContactPage.class));
-		return pages;
+		return getBean(MiruPages.class).getMenuPages();
 	}
 
 	protected void addNavigationMenu() {
@@ -102,7 +96,7 @@ public abstract class TemplatePage extends WebPage {
 				item.add(link);
 				link.add(new Label("name", getLocalizedString(model.getName(),
 						model.getName())));
-				final Class<? extends TemplatePage> pageClass = model
+				final Class<? extends WebPage> pageClass = model
 						.getPageClass();
 				link.add(new AttributeModifier("class",
 						new AbstractReadOnlyModel<String>() {
@@ -143,26 +137,6 @@ public abstract class TemplatePage extends WebPage {
 	}
 
 	protected abstract String getTitle();
-
-	public class PageModel {
-		private String name;
-		private Class<? extends TemplatePage> pageClass;
-
-		public PageModel(String name, Class<? extends TemplatePage> pageClass) {
-			super();
-			this.name = name;
-			this.pageClass = pageClass;
-		}
-
-		public Class<? extends TemplatePage> getPageClass() {
-			return pageClass;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-	}
 
 	public MiruSession getAuthSession() {
 		return (MiruSession) super.getSession();

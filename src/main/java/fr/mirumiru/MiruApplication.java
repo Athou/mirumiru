@@ -15,18 +15,9 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.IRequestMapper;
 
 import fr.mirumiru.auth.LoginPage;
-import fr.mirumiru.auth.LogoutPage;
 import fr.mirumiru.auth.MiruSession;
-import fr.mirumiru.pages.AboutPage;
-import fr.mirumiru.pages.Error404Page;
-import fr.mirumiru.pages.PortfolioPage;
-import fr.mirumiru.pages.ContactPage;
-import fr.mirumiru.pages.CrochetInfoPage;
-import fr.mirumiru.pages.FAQPage;
-import fr.mirumiru.pages.FacebookNewsPage;
-import fr.mirumiru.pages.GalleryListPage;
 import fr.mirumiru.pages.HomePage;
-import fr.mirumiru.pages.admin.AdminHomePage;
+import fr.mirumiru.utils.PageModel;
 import fr.mirumiru.utils.locale.LocaleFirstMapper;
 
 public class MiruApplication extends AuthenticatedWebApplication {
@@ -36,12 +27,6 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	@Override
 	protected void init() {
 		super.init();
-		mountPages();
-
-		IRequestMapper localeFirstMapper = new LocaleFirstMapper(
-				getRootRequestMapperAsCompound());
-		setRootRequestMapper(localeFirstMapper);
-
 		try {
 			beanManager = (BeanManager) new InitialContext()
 					.lookup("java:comp/BeanManager");
@@ -49,24 +34,20 @@ public class MiruApplication extends AuthenticatedWebApplication {
 			throw new IllegalStateException("Unable to obtain CDI BeanManager",
 					e);
 		}
+
+		mountPages();
+
+		IRequestMapper localeFirstMapper = new LocaleFirstMapper(
+				getRootRequestMapperAsCompound());
+		setRootRequestMapper(localeFirstMapper);
+
 	}
 
 	private void mountPages() {
-		mountPage("/about", AboutPage.class);
-		mountPage("/news/#{page}", FacebookNewsPage.class);
-		mountPage("/portfolio", PortfolioPage.class);
-		mountPage("/crochet", CrochetInfoPage.class);
-		mountPage("/albums", GalleryListPage.class);
-		mountPage("/faq", FAQPage.class);
-		mountPage("/contact", ContactPage.class);
-
-		mountPage("/login", LoginPage.class);
-		mountPage("/logout", LogoutPage.class);
-
-		mountPage("/admin", AdminHomePage.class);
-
-		mountPage("/404", Error404Page.class);
-
+		MiruPages miruPages = getBean(MiruPages.class);
+		for (PageModel page : miruPages.getMountPoints()) {
+			mountPage(page.getName(), page.getPageClass());
+		}
 	}
 
 	@SuppressWarnings("unchecked")

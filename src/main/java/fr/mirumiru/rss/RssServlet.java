@@ -43,7 +43,6 @@ public class RssServlet extends HttpServlet {
 		String path = req.getScheme()
 				+ "://"
 				+ req.getServerName()
-				+ (req.getServerPort() == 80 ? "" : ":" + req.getServerPort())
 				+ req.getRequestURI().substring(0,
 						req.getRequestURI().length() - 4);
 		feed.setLink(path);

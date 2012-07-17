@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+	<url wicket:id="url">
+		<loc wicket:id="loc">http://www.example.com/</loc>
+		<lastmod wicket:id="lastmod">2005-01-01</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+</urlset> 

@@ -1,5 +1,7 @@
 package fr.mirumiru.utils;
 
+import java.util.Calendar;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -15,8 +17,11 @@ public class StartupBean {
 	@Inject
 	UserDAO userDAO;
 
+	private Calendar startupTime;
+
 	@PostConstruct
 	public void init() {
+		startupTime = Calendar.getInstance();
 		populateDatabase();
 	}
 
@@ -26,4 +31,8 @@ public class StartupBean {
 		userDAO.save(user);
 
 	}
+
+	public Calendar getStartupTime() {
+		return startupTime;
+	};
 }

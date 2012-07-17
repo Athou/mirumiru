@@ -32,9 +32,8 @@ public class LocaleFirstMapper implements IRequestMapper {
 		if (CollectionUtils.isNotEmpty(segments)) {
 			String localeAsString = segments.get(0);
 			if (StringUtils.isNotEmpty(localeAsString)) {
-				Locale locale = LocaleHelper.parseLocale(localeAsString);
-				if (locale != null
-						&& WicketUtils.Language.isLocaleSupported(locale)) {
+				Locale locale = new Locale(localeAsString);
+				if (WicketUtils.Language.isLocaleSupported(locale)) {
 					Session.get().setLocale(locale);
 					request = cleanRequest(request);
 				}
