@@ -32,12 +32,12 @@ public class PortfolioPage extends ContentPage {
 						+ portfolioItem.getImage();
 				item.add(new Label("name", imageName));
 				item.add(new Label("desc", imageDesc == null ? "" : imageDesc));
-				ExternalLink link = new ExternalLink("link", imagePath);
+				ExternalLink link = new ExternalLink("link", imagePath + ".jpg");
 				link.add(new AttributeModifier("title", imageName
 						+ (imageDesc == null ? "" : " (" + imageDesc + ")")));
 				item.add(link);
 				Component image = new WebMarkupContainer("image");
-				image.add(new AttributeModifier("src", imagePath));
+				image.add(new AttributeModifier("src", imagePath + "_tn.jpg"));
 				link.add(image);
 			}
 		};
