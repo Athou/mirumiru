@@ -28,7 +28,10 @@ public class FacebookNewsPage extends ContentPage {
 
 		List<Post> posts = getBean(FacebookService.class).getPosts();
 		int pageMax = calculatePageMax(posts);
-		if (page < 1 || page > pageMax) {
+
+		if (posts.isEmpty()) {
+			setResponsePage(Error404Page.class);
+		} else if (page < 1 || page > pageMax) {
 			page = pageMax;
 			setResponsePage(getPageClass(),
 					WicketUtils.buildParams("page", page));
