@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.wicket.Application;
-
 import com.google.common.collect.Lists;
 import com.restfb.types.Post;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -33,7 +31,7 @@ public class RssServlet extends HttpServlet {
 
 		resp.setContentType("text/xml");
 
-		MiruApplication app = (MiruApplication) Application.get();
+		MiruApplication app = MiruApplication.get();
 		FacebookService facebookService = app.getBean(FacebookService.class);
 		List<Post> list = facebookService.getPosts();
 

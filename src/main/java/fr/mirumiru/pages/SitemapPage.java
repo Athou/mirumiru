@@ -63,8 +63,7 @@ public class SitemapPage extends WebPage {
 	}
 
 	public <T> T getBean(Class<? extends T> klass) {
-		MiruApplication application = (MiruApplication) getApplication();
-		return application.getBean(klass);
+		return MiruApplication.get().getBean(klass);
 	}
 
 	private class ExtendedPageModel extends PageModel {

@@ -8,6 +8,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
@@ -48,6 +49,10 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		for (PageModel page : miruPages.getMountPoints()) {
 			mountPage(page.getName(), page.getPageClass());
 		}
+	}
+
+	public static MiruApplication get() {
+		return (MiruApplication) Application.get();
 	}
 
 	@SuppressWarnings("unchecked")

@@ -3,7 +3,7 @@ package fr.mirumiru.auth;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.wicket.Application;
+import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
@@ -36,7 +36,7 @@ public class MiruSession extends AuthenticatedWebSession {
 	public boolean authenticate(String username, String password) {
 		String adminPassword = "admin";
 
-		MiruApplication app = (MiruApplication) Application.get();
+		MiruApplication app = MiruApplication.get();
 		List<User> users = app.getBean(UserDAO.class).findByField("name",
 				username);
 
@@ -50,6 +50,10 @@ public class MiruSession extends AuthenticatedWebSession {
 
 	public User getUser() {
 		return user;
+	}
+
+	public static MiruSession get() {
+		return (MiruSession) Session.get();
 	}
 
 }

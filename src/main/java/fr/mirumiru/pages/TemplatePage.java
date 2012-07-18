@@ -171,8 +171,7 @@ public abstract class TemplatePage extends WebPage {
 	}
 
 	public <T> T getBean(Class<? extends T> klass) {
-		MiruApplication application = (MiruApplication) getApplication();
-		return application.getBean(klass);
+		return MiruApplication.get().getBean(klass);
 	}
 
 	public Logger getLog() {
