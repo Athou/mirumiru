@@ -10,6 +10,7 @@ import org.apache.wicket.bootstrap.Bootstrap;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.PriorityHeaderItem;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -36,10 +37,27 @@ import fr.mirumiru.utils.WicketUtils.Language;
 @SuppressWarnings("serial")
 public abstract class TemplatePage extends WebPage {
 
-	public TemplatePage() {
+	protected WebMarkupContainer html;
 
-		add(new Label("title", getLocalizedString(getTitle(), getTitle())));
-		add(new BookmarkablePageLink<HomePage>("logo-link", HomePage.class));
+	public TemplatePage() {
+		html = new WebMarkupContainer("html");
+		html.add(new AttributeModifier("lang",
+				new AbstractReadOnlyModel<String>() {
+					@Override
+					public String getObject() {
+						return getSession().getLocale().getLanguage();
+					}
+				}));
+		html.add(new AttributeModifier("xmlns:wicket",
+				new AbstractReadOnlyModel<String>() {
+					@Override
+					public String getObject() {
+						return AttributeModifier.VALUELESS_ATTRIBUTE_REMOVE;
+					}
+				}));
+		add(html);
+		html.add(new Label("title", getLocalizedString(getTitle(), getTitle())));
+		html.add(new BookmarkablePageLink<HomePage>("logo-link", HomePage.class));
 		addNavigationMenu();
 		addFacebookPosts();
 
@@ -70,10 +88,10 @@ public abstract class TemplatePage extends WebPage {
 			}
 		};
 
-		add(flags);
+		html.add(flags);
 
-		add(new BookmarkablePageLink<TemplatePage>("faq", FAQPage.class));
-		add(new BookmarkablePageLink<TemplatePage>("contactpage",
+		html.add(new BookmarkablePageLink<TemplatePage>("faq", FAQPage.class));
+		html.add(new BookmarkablePageLink<TemplatePage>("contactpage",
 				ContactPage.class));
 
 	}
@@ -110,7 +128,7 @@ public abstract class TemplatePage extends WebPage {
 						}));
 			}
 		};
-		add(entries);
+		html.add(entries);
 	}
 
 	private void addFacebookPosts() {
@@ -133,9 +151,9 @@ public abstract class TemplatePage extends WebPage {
 				item.add(new FacebookPost("post", post, 85));
 			}
 		};
-		add(posts);
+		html.add(posts);
 
-		add(new BookmarkablePageLink<TemplatePage>("more-news",
+		html.add(new BookmarkablePageLink<TemplatePage>("more-news",
 				FacebookNewsPage.class));
 	}
 

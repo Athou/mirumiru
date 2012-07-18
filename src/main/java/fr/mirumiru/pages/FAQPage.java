@@ -51,7 +51,7 @@ public class FAQPage extends ContentPage {
 				item.add(new Label("answer", qaa.answer));
 			}
 		};
-		add(view);
+		html.add(view);
 
 	}
 

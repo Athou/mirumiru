@@ -6,7 +6,7 @@ import fr.mirumiru.pages.TemplatePage;
 public class LoginPage extends TemplatePage {
 
 	public LoginPage() {
-		add(new LoginPanel("login"));
+		html.add(new LoginPanel("login"));
 	}
 
 	@Override

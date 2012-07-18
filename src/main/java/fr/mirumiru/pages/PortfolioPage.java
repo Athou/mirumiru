@@ -41,7 +41,7 @@ public class PortfolioPage extends ContentPage {
 				link.add(image);
 			}
 		};
-		add(portfolioView);
+		html.add(portfolioView);
 	}
 
 	private class PortfolioModel extends
