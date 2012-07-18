@@ -6,6 +6,10 @@ import org.apache.log4j.Logger;
 import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.bootstrap.Bootstrap;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.PriorityHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -96,8 +100,7 @@ public abstract class TemplatePage extends WebPage {
 				item.add(link);
 				link.add(new Label("name", getLocalizedString(model.getName(),
 						model.getName())));
-				final Class<? extends WebPage> pageClass = model
-						.getPageClass();
+				final Class<? extends WebPage> pageClass = model.getPageClass();
 				link.add(new AttributeModifier("class",
 						new AbstractReadOnlyModel<String>() {
 							public String getObject() {
@@ -134,6 +137,13 @@ public abstract class TemplatePage extends WebPage {
 
 		add(new BookmarkablePageLink<TemplatePage>("more-news",
 				FacebookNewsPage.class));
+	}
+
+	@Override
+	public void renderHead(IHeaderResponse response) {
+		super.renderHead(response);
+		response.render(new PriorityHeaderItem(JavaScriptHeaderItem
+				.forReference(Bootstrap.get())));
 	}
 
 	protected abstract String getTitle();
