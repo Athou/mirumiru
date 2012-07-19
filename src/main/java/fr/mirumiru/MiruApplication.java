@@ -17,9 +17,9 @@ import org.apache.wicket.request.IRequestMapper;
 
 import fr.mirumiru.auth.LoginPage;
 import fr.mirumiru.auth.MiruSession;
+import fr.mirumiru.model.PageModel;
 import fr.mirumiru.pages.HomePage;
-import fr.mirumiru.utils.PageModel;
-import fr.mirumiru.utils.locale.LocaleFirstMapper;
+import fr.mirumiru.utils.LocaleFirstMapper;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 

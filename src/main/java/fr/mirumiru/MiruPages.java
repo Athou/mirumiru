@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 
 import fr.mirumiru.auth.LoginPage;
 import fr.mirumiru.auth.LogoutPage;
+import fr.mirumiru.model.PageModel;
 import fr.mirumiru.pages.AboutPage;
 import fr.mirumiru.pages.ContactPage;
 import fr.mirumiru.pages.CrochetInfoPage;
@@ -20,7 +21,6 @@ import fr.mirumiru.pages.HomePage;
 import fr.mirumiru.pages.PortfolioPage;
 import fr.mirumiru.pages.SitemapPage;
 import fr.mirumiru.pages.admin.AdminHomePage;
-import fr.mirumiru.utils.PageModel;
 
 @Singleton
 public class MiruPages {

@@ -17,8 +17,8 @@ import com.google.common.collect.Lists;
 
 import fr.mirumiru.MiruApplication;
 import fr.mirumiru.MiruPages;
-import fr.mirumiru.utils.PageModel;
-import fr.mirumiru.utils.StartupBean;
+import fr.mirumiru.model.PageModel;
+import fr.mirumiru.services.StartupBean;
 import fr.mirumiru.utils.WicketUtils;
 import fr.mirumiru.utils.WicketUtils.Language;
 

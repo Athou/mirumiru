@@ -1,4 +1,4 @@
-package fr.mirumiru.utils;
+package fr.mirumiru.services;
 
 import java.util.Calendar;
 
@@ -8,7 +8,6 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 
 import fr.mirumiru.model.User;
-import fr.mirumiru.services.UserDAO;
 
 @Startup
 @Singleton

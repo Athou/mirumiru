@@ -9,8 +9,8 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.StringValidator;
 
+import fr.mirumiru.components.BootstrapFeedbackPanel;
 import fr.mirumiru.services.MailService;
-import fr.mirumiru.utils.BootstrapFeedbackPanel;
 
 @SuppressWarnings("serial")
 public class ContactPage extends ContentPage {

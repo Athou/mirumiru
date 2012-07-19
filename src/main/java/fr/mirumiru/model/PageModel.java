@@ -1,4 +1,4 @@
-package fr.mirumiru.utils;
+package fr.mirumiru.model;
 
 import java.io.Serializable;
 

@@ -7,8 +7,8 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 
 import com.google.common.collect.Lists;
 
+import fr.mirumiru.model.PageModel;
 import fr.mirumiru.pages.TemplatePage;
-import fr.mirumiru.utils.PageModel;
 
 @SuppressWarnings("serial")
 @AuthorizeInstantiation(Roles.ADMIN)

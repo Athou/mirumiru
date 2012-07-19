@@ -29,8 +29,8 @@ import fr.mirumiru.MiruApplication;
 import fr.mirumiru.MiruPages;
 import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.components.FacebookPost;
+import fr.mirumiru.model.PageModel;
 import fr.mirumiru.services.FacebookService;
-import fr.mirumiru.utils.PageModel;
 import fr.mirumiru.utils.WicketUtils;
 import fr.mirumiru.utils.WicketUtils.Language;
 

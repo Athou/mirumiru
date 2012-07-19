@@ -1,4 +1,4 @@
-package fr.mirumiru.utils.locale;
+package fr.mirumiru.utils;
 
 import java.util.List;
 import java.util.Locale;
@@ -11,7 +11,6 @@ import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Url;
 
-import fr.mirumiru.utils.WicketUtils;
 
 public class LocaleFirstMapper implements IRequestMapper {
 
@@ -51,14 +50,25 @@ public class LocaleFirstMapper implements IRequestMapper {
 					|| !WicketUtils.Language.isLocaleSupported(locale)) {
 				locale = Locale.FRENCH;
 			}
-			url.getSegments().add(0, locale.getLanguage());
+			List<String> segments = url.getSegments();
+			if (CollectionUtils.isNotEmpty(segments)
+					&& ("wicket".equals(segments.get(0)) || "sitemap.xml"
+							.equals(segments.get(0)))) {
+				// do nothing
+			} else {
+				url.getSegments().add(0, locale.getLanguage());
+			}
 		}
 		return url;
 	}
 
 	private Request cleanRequest(Request req) {
 		Url url = req.getUrl();
-		url.getSegments().remove(0);
+		List<String> segments = url.getSegments();
+		if (CollectionUtils.isNotEmpty(segments)
+				&& WicketUtils.Language.isLanguageSupported(segments.get(0))) {
+			url.getSegments().remove(0);
+		}
 		return req.cloneWithUrl(url);
 	}
 

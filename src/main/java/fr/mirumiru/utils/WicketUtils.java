@@ -27,10 +27,14 @@ public class WicketUtils {
 		}
 
 		public static boolean isLocaleSupported(Locale locale) {
+			return locale == null ? null : isLanguageSupported(locale
+					.getLanguage());
+		}
+
+		public static boolean isLanguageSupported(String lang) {
 			boolean supported = false;
 			for (Language l : values()) {
-				if (StringUtils.equals(locale.getLanguage(), l.getLocale()
-						.getLanguage())) {
+				if (StringUtils.equals(lang, l.getLocale().getLanguage())) {
 					supported = true;
 					break;
 				}
