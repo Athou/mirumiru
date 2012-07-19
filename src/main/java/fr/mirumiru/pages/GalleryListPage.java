@@ -14,8 +14,10 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import com.restfb.types.Album;
 
 import fr.mirumiru.services.FacebookService;
+import fr.mirumiru.utils.Mount;
 
 @SuppressWarnings("serial")
+@Mount(path = "albums", menu = "albums", menuOrder = 50)
 public class GalleryListPage extends ContentPage {
 
 	public GalleryListPage() {
@@ -27,7 +29,7 @@ public class GalleryListPage extends ContentPage {
 				Album album = item.getModelObject();
 				item.add(new Label("name"));
 				item.add(new Label("count"));
-				//item.add(new Label("description"));
+				// item.add(new Label("description"));
 				ExternalLink link = new ExternalLink("link", album.getLink());
 				String imageUrl = "http://graph.facebook.com/"
 						+ album.getCoverPhoto() + "/picture";

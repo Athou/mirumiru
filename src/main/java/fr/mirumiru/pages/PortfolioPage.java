@@ -14,8 +14,10 @@ import org.apache.wicket.model.LoadableDetachableModel;
 
 import fr.mirumiru.model.Portfolio.PortfolioItem;
 import fr.mirumiru.services.PortfolioService;
+import fr.mirumiru.utils.Mount;
 
 @SuppressWarnings("serial")
+@Mount(path = "portfolio", menu = "portfolio", menuOrder = 30)
 public class PortfolioPage extends ContentPage {
 
 	public PortfolioPage() {

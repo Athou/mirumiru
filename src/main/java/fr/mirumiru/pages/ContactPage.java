@@ -11,8 +11,10 @@ import org.apache.wicket.validation.validator.StringValidator;
 
 import fr.mirumiru.components.BootstrapFeedbackPanel;
 import fr.mirumiru.services.MailService;
+import fr.mirumiru.utils.Mount;
 
 @SuppressWarnings("serial")
+@Mount(path = "contact", menu = "contact", menuOrder = 70)
 public class ContactPage extends ContentPage {
 
 	private String name;

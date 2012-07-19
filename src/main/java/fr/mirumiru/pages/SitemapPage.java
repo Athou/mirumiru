@@ -16,18 +16,18 @@ import org.apache.wicket.request.Url;
 import com.google.common.collect.Lists;
 
 import fr.mirumiru.MiruApplication;
-import fr.mirumiru.MiruPages;
 import fr.mirumiru.model.PageModel;
 import fr.mirumiru.services.StartupBean;
+import fr.mirumiru.utils.Mount;
 import fr.mirumiru.utils.WicketUtils;
 import fr.mirumiru.utils.WicketUtils.Language;
 
 @SuppressWarnings("serial")
+@Mount(path = "sitemap.xml")
 public class SitemapPage extends WebPage {
 
 	public SitemapPage() {
-		List<PageModel> pages = getBean(MiruPages.class).getMenuPages();
-
+		List<PageModel> pages = WicketUtils.getMenuPages();
 		List<ExtendedPageModel> model = Lists.newArrayList();
 		for (PageModel page : pages) {
 			for (Language lang : WicketUtils.Language.values()) {
@@ -71,7 +71,7 @@ public class SitemapPage extends WebPage {
 		private Locale locale;
 
 		public ExtendedPageModel(PageModel model, Locale locale) {
-			super(model.getName(), model.getPageClass());
+			super(model.getName(), model.getMenuOrder(), model.getPageClass());
 			this.locale = locale;
 		}
 

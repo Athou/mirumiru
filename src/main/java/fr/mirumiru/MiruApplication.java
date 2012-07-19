@@ -1,5 +1,7 @@
 package fr.mirumiru;
 
+import java.lang.annotation.Annotation;
+import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -8,6 +10,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.Application;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
@@ -15,11 +18,13 @@ import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.IRequestMapper;
 
+import com.google.common.collect.Lists;
+
 import fr.mirumiru.auth.LoginPage;
 import fr.mirumiru.auth.MiruSession;
-import fr.mirumiru.model.PageModel;
 import fr.mirumiru.pages.HomePage;
 import fr.mirumiru.utils.LocaleFirstMapper;
+import fr.mirumiru.utils.Mount;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 
@@ -45,9 +50,12 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	}
 
 	private void mountPages() {
-		MiruPages miruPages = getBean(MiruPages.class);
-		for (PageModel page : miruPages.getMountPoints()) {
-			mountPage(page.getName(), page.getPageClass());
+		for (Class<WebPage> klass : getBeanClasses(WebPage.class, Mount.class)) {
+			Mount mount = klass.getAnnotation(Mount.class);
+			String path = mount.path();
+			if (StringUtils.isNotBlank(path)) {
+				mountPage(path, klass);
+			}
 		}
 	}
 
@@ -63,6 +71,20 @@ public class MiruApplication extends AuthenticatedWebApplication {
 				.createCreationalContext(bean);
 		T result = (T) beanManager.getReference(bean, klass, creationalContext);
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> List<Class<T>> getBeanClasses(Class<? extends T> klass,
+			Class<? extends Annotation> annotation) {
+		List<Class<T>> list = Lists.newArrayList();
+		Set<Bean<?>> beans = beanManager.getBeans(klass);
+		for (Bean<?> bean : beans) {
+			Class<?> beanClass = bean.getBeanClass();
+			if (beanClass.isAnnotationPresent(annotation)) {
+				list.add((Class<T>) beanClass);
+			}
+		}
+		return list;
 	}
 
 	@Override

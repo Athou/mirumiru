@@ -14,9 +14,11 @@ import com.restfb.types.Post;
 
 import fr.mirumiru.components.FacebookPost;
 import fr.mirumiru.services.FacebookService;
+import fr.mirumiru.utils.Mount;
 import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
+@Mount(path = "news/#{page}", menu = "news", menuOrder = 20)
 public class FacebookNewsPage extends ContentPage {
 
 	private static final int NEWS_PER_PAGE = 3;

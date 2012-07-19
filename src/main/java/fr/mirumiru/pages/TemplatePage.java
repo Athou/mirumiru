@@ -26,8 +26,6 @@ import com.google.common.collect.Lists;
 import com.restfb.types.Post;
 
 import fr.mirumiru.MiruApplication;
-import fr.mirumiru.MiruPages;
-import fr.mirumiru.auth.MiruSession;
 import fr.mirumiru.components.FacebookPost;
 import fr.mirumiru.model.PageModel;
 import fr.mirumiru.services.FacebookService;
@@ -96,15 +94,15 @@ public abstract class TemplatePage extends WebPage {
 
 	}
 
-	protected List<PageModel> getPages() {
-		return getBean(MiruPages.class).getMenuPages();
+	protected List<PageModel> getMenuPages() {
+		return WicketUtils.getMenuPages();
 	}
 
-	protected void addNavigationMenu() {
+	private void addNavigationMenu() {
 
 		IModel<List<PageModel>> model = new LoadableDetachableModel<List<PageModel>>() {
 			protected java.util.List<PageModel> load() {
-				return getPages();
+				return getMenuPages();
 			}
 		};
 
@@ -165,10 +163,6 @@ public abstract class TemplatePage extends WebPage {
 	}
 
 	protected abstract String getTitle();
-
-	public MiruSession getAuthSession() {
-		return (MiruSession) super.getSession();
-	}
 
 	public <T> T getBean(Class<? extends T> klass) {
 		return MiruApplication.get().getBean(klass);
