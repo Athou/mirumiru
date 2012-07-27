@@ -25,6 +25,10 @@ public class FacebookNewsPage extends ContentPage {
 
 	private int page;
 
+	public FacebookNewsPage() {
+		this(new PageParameters());
+	}
+
 	public FacebookNewsPage(PageParameters params) {
 		page = params.get("page").toInt(-1);
 
@@ -33,10 +37,12 @@ public class FacebookNewsPage extends ContentPage {
 
 		if (posts.isEmpty()) {
 			setResponsePage(Error404Page.class);
+			return;
 		} else if (page < 1 || page > pageMax) {
 			page = pageMax;
 			setResponsePage(getPageClass(),
 					WicketUtils.buildParams("page", page));
+			return;
 		}
 
 		IModel<List<Post>> model = new LoadableDetachableModel<List<Post>>() {
