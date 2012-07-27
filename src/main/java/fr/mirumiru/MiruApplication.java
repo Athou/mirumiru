@@ -16,7 +16,6 @@ import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.request.IRequestMapper;
 
 import com.google.common.collect.Lists;
 
@@ -42,10 +41,8 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		}
 
 		mountPages();
-
-		IRequestMapper localeFirstMapper = new LocaleFirstMapper(
-				getRootRequestMapperAsCompound());
-		setRootRequestMapper(localeFirstMapper);
+		setRootRequestMapper(new LocaleFirstMapper(
+				getRootRequestMapperAsCompound()));
 
 	}
 
