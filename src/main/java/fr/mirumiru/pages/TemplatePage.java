@@ -1,10 +1,12 @@
 package fr.mirumiru.pages;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.Session;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.bootstrap.Bootstrap;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -14,7 +16,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.StatelessLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PropertyListView;
@@ -72,12 +74,16 @@ public abstract class TemplatePage extends WebPage {
 			@Override
 			protected void populateItem(ListItem<Language> item) {
 				final Language lang = item.getModelObject();
-				StatelessLink<Void> link = new StatelessLink<Void>("link") {
+				Link<Void> link = new BookmarkablePageLink<Void>("link",
+						getPageClass(), getPageParameters()) {
 					@Override
-					public void onClick() {
-						getSession().setLocale(lang.getLocale());
-						setResponsePage(getPage().getClass(),
-								getPageParameters());
+					protected CharSequence getURL() {
+						Session session = Session.get();
+						Locale oldLocale = session.getLocale();
+						session.setLocale(lang.getLocale());
+						CharSequence url = super.getURL();
+						session.setLocale(oldLocale);
+						return url;
 					}
 				};
 				link.add(new AttributeAppender("class", " "
