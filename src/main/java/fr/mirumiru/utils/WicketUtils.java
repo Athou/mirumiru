@@ -17,14 +17,17 @@ import fr.mirumiru.pages.TemplatePage;
 public class WicketUtils {
 
 	public enum Language {
-		ENGLISH(Locale.ENGLISH, "flag-gb"), FRENCH(Locale.FRENCH, "flag-fr");
+		ENGLISH(Locale.ENGLISH, "flag-gb", "English"), FRENCH(Locale.FRENCH,
+				"flag-fr", "Fran\u00E7ais");
 
 		private Locale locale;
 		private String className;
+		private String displayName;
 
-		private Language(Locale locale, String className) {
+		private Language(Locale locale, String className, String displayName) {
 			this.locale = locale;
 			this.className = className;
+			this.displayName = displayName;
 		}
 
 		public String getClassName() {
@@ -33,6 +36,10 @@ public class WicketUtils {
 
 		public Locale getLocale() {
 			return locale;
+		}
+
+		public String getDisplayName() {
+			return displayName;
 		}
 
 		public static boolean isLocaleSupported(Locale locale) {

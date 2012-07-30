@@ -88,6 +88,7 @@ public abstract class TemplatePage extends WebPage {
 				};
 				link.add(new AttributeAppender("class", " "
 						+ lang.getClassName()));
+				link.add(new AttributeAppender("title", lang.getDisplayName()));
 				item.add(link);
 			}
 		};
