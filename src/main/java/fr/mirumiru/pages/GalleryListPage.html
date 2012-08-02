@@ -21,13 +21,6 @@
 				</li>
 			</ul>
 		</div>
-		<script type="text/javascript">
-			$(function(){
-				var divs = $('div.thumbnail');
-				var maxHeight = Math.max.apply(Math, divs.map(function(){ return $(this).height(); }).get());
-				divs.height(maxHeight);
-			});
-		</script>
 	</wicket:extend>
 </body>
 </html>
