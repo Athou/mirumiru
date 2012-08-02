@@ -39,7 +39,7 @@ public class FacebookService {
 		return cache.getPosts();
 	}
 
-	@Schedule(hour = "*")
+	@Schedule(hour = "*", persistent = false)
 	@PostConstruct
 	private void refresh() {
 		synchronized (this) {
