@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
@@ -13,11 +12,11 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import fr.mirumiru.model.Portfolio.PortfolioItem;
 import fr.mirumiru.services.PortfolioService;
 import fr.mirumiru.utils.Mount;
+import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
 @Mount(path = "portfolio", menu = "portfolio", menuOrder = 30)
@@ -60,10 +59,7 @@ public class PortfolioPage extends ContentPage {
 	@Override
 	public void renderHead(IHeaderResponse response) {
 		super.renderHead(response);
-		response.render(JavaScriptReferenceHeaderItem
-				.forReference(new JavaScriptResourceReference(
-						PortfolioPage.class, PortfolioPage.class
-								.getSimpleName() + ".js")));
+		response.render(WicketUtils.loadJS(getClass()));
 	}
 
 	@Override

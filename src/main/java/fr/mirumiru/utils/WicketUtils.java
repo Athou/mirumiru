@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.wicket.markup.head.CssReferenceHeaderItem;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.CssResourceReference;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import com.google.common.collect.Lists;
 
@@ -91,5 +95,16 @@ public class WicketUtils {
 			params.add(key, value);
 		}
 		return params;
+	}
+
+	public static JavaScriptReferenceHeaderItem loadJS(Class<?> klass) {
+		return JavaScriptReferenceHeaderItem
+				.forReference(new JavaScriptResourceReference(klass, klass
+						.getSimpleName() + ".js"));
+	}
+
+	public static CssReferenceHeaderItem loadCSS(Class<?> klass) {
+		return CssReferenceHeaderItem.forReference(new CssResourceReference(
+				klass, klass.getSimpleName() + ".css"));
 	}
 }
