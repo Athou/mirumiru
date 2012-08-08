@@ -48,26 +48,28 @@ public class FacebookService {
 					new ArrayList<Post>());
 			try {
 				log.info("Refreshing album list from Facebook");
+				String token = bundle.getFacebookAuthToken();
+				if (token != null) {
+					FacebookClient client = new DefaultFacebookClient(token);
 
-				FacebookClient client = new DefaultFacebookClient(
-						bundle.getFacebookAuthToken());
+					Connection<Album> albumConnection = client.fetchConnection(
+							"127903530580737/albums", Album.class);
+					List<Album> albums = new ArrayList<Album>(
+							albumConnection.getData());
+					Collections.sort(albums, new Comparator<Album>() {
+						@Override
+						public int compare(Album o1, Album o2) {
+							return o2.getCreatedTime().compareTo(
+									o1.getCreatedTime());
+						}
+					});
 
-				Connection<Album> albumConnection = client.fetchConnection(
-						"127903530580737/albums", Album.class);
-				List<Album> albums = new ArrayList<Album>(
-						albumConnection.getData());
-				Collections.sort(albums, new Comparator<Album>() {
-					@Override
-					public int compare(Album o1, Album o2) {
-						return o2.getCreatedTime().compareTo(
-								o1.getCreatedTime());
-					}
-				});
-
-				Connection<Post> postConnection = client.fetchConnection(
-						"127903530580737/statuses&limit=1000", Post.class);
-				List<Post> posts = new ArrayList<Post>(postConnection.getData());
-				cache = new FacebookCache(albums, posts);
+					Connection<Post> postConnection = client.fetchConnection(
+							"127903530580737/statuses&limit=1000", Post.class);
+					List<Post> posts = new ArrayList<Post>(
+							postConnection.getData());
+					cache = new FacebookCache(albums, posts);
+				}
 			} catch (Exception e) {
 				log.fatal("Could not refresh facebook infos", e);
 			}

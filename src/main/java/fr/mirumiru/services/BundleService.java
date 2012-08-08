@@ -40,19 +40,26 @@ public class BundleService {
 	}
 
 	public String getFacebookAuthToken() {
-		return props.getProperty("facebook.authtoken");
+		return getProperty("facebook.authtoken");
 	}
-	
+
 	public String getSmtpGmailUserName() {
-		return props.getProperty("mail.smtp.gmail.username");
+		return getProperty("mail.smtp.gmail.username");
 	}
 
 	public String getSmtpGmailPassword() {
-		return props.getProperty("mail.smtp.gmail.password");
+		return getProperty("mail.smtp.gmail.password");
 	}
 
 	public String getMailDest() {
-		return props.getProperty("mail.dest");
+		return getProperty("mail.dest");
+	}
+
+	private String getProperty(String name) {
+		if (props == null) {
+			return null;
+		}
+		return props.getProperty(name);
 	}
 
 }
