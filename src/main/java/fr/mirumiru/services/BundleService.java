@@ -33,7 +33,7 @@ public class BundleService {
 			}
 			props.load(is);
 		} catch (Exception e) {
-			log.fatal("Could not load config file", e);
+			log.fatal("Could not load config file");
 		} finally {
 			IOUtils.closeQuietly(is);
 		}

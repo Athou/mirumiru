@@ -48,8 +48,8 @@ public class PagesTest {
 		archive.merge(
 				ShrinkWrap.create(GenericArchive.class)
 						.as(ExplodedImporter.class).importDirectory(WEBAPP_SRC)
-						.importDirectory(RESOURCES_SRC)
 						.importDirectory(TEST_RESOURCES_SRC)
+						.importDirectory(RESOURCES_SRC)
 						.as(GenericArchive.class), "/", Filters.includeAll());
 		archive.addPackages(true, MiruApplication.class.getPackage());
 		return archive;

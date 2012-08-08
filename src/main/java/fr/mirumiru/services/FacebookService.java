@@ -11,6 +11,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.restfb.Connection;
@@ -49,7 +50,7 @@ public class FacebookService {
 			try {
 				log.info("Refreshing album list from Facebook");
 				String token = bundle.getFacebookAuthToken();
-				if (token != null) {
+				if (StringUtils.isNotBlank(token)) {
 					FacebookClient client = new DefaultFacebookClient(token);
 
 					Connection<Album> albumConnection = client.fetchConnection(
