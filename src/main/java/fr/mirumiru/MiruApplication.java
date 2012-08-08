@@ -27,11 +27,19 @@ import fr.mirumiru.utils.Mount;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 
-	private BeanManager beanManager;
+	BeanManager beanManager;
 
 	@Override
 	protected void init() {
 		super.init();
+		setupBeanManager();
+		mountPages();
+		setRootRequestMapper(new LocaleFirstMapper(
+				getRootRequestMapperAsCompound()));
+
+	}
+
+	protected void setupBeanManager() {
 		try {
 			beanManager = (BeanManager) new InitialContext()
 					.lookup("java:comp/BeanManager");
@@ -39,11 +47,6 @@ public class MiruApplication extends AuthenticatedWebApplication {
 			throw new IllegalStateException("Unable to obtain CDI BeanManager",
 					e);
 		}
-
-		mountPages();
-		setRootRequestMapper(new LocaleFirstMapper(
-				getRootRequestMapperAsCompound()));
-
 	}
 
 	private void mountPages() {

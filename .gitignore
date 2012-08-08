@@ -3,3 +3,4 @@
 .classpath
 target
 src/main/resources/config.properties
+derby.log
