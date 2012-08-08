@@ -192,9 +192,6 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<properties>
-				<webXmlPath>src/main/webapp/WEB-INF/web-prod.xml</webXmlPath>
-			</properties>
 		</profile>
 
 		<profile>
