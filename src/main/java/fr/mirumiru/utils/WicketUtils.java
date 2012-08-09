@@ -47,7 +47,7 @@ public class WicketUtils {
 		}
 
 		public static boolean isLocaleSupported(Locale locale) {
-			return locale == null ? null : isLanguageSupported(locale
+			return locale == null ? false : isLanguageSupported(locale
 					.getLanguage());
 		}
 
