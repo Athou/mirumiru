@@ -76,6 +76,14 @@ body {
 	color: white;
 }
 
+.gallery .gallery-div {
+	height: 222px;
+}
+
+.gallery .portfolio-div {
+	height: 204px;
+}
+
 .gallery .thumbnail img {
 	height: 150px;
 }
@@ -86,7 +94,6 @@ div.thumbnail:hover {
 	-moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 	box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
-
 
 /* Bootstrap customization */
 .well {
