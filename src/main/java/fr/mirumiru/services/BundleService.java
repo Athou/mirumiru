@@ -54,6 +54,10 @@ public class BundleService {
 	public String getMailDest() {
 		return getProperty("mail.dest");
 	}
+	
+	public String getWebServerRootPath() {
+		return getProperty("web");
+	}
 
 	private String getProperty(String name) {
 		if (props == null) {
@@ -61,5 +65,7 @@ public class BundleService {
 		}
 		return props.getProperty(name);
 	}
+
+
 
 }
