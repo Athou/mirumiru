@@ -19,7 +19,7 @@ public class PingBean {
 	@Inject
 	Logger log;
 
-	@Schedule(hour = "*", persistent = false)
+	@Schedule(minute = "30", hour = "*", persistent = false)
 	private void refresh() {
 		InputStream stream = null;
 		try {
