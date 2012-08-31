@@ -2,8 +2,11 @@ package fr.mirumiru.components;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.feedback.IFeedbackMessageFilter;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.AbstractReadOnlyModel;
+
+import fr.mirumiru.utils.WicketUtils;
 
 public class BootstrapFeedbackPanel extends FeedbackPanel {
 
@@ -35,6 +38,12 @@ public class BootstrapFeedbackPanel extends FeedbackPanel {
 	protected void onBeforeRender() {
 		setVisible(anyMessage());
 		super.onBeforeRender();
+	}
+	
+	@Override
+	public void renderHead(IHeaderResponse response) {
+		super.renderHead(response);
+		response.render(WicketUtils.loadCSS(BootstrapFeedbackPanel.class));
 	}
 
 }

@@ -1,4 +1,4 @@
-package fr.mirumiru.pages.admin;
+package fr.mirumiru.adminpages;
 
 import java.util.List;
 

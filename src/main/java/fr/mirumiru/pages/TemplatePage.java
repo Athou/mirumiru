@@ -10,8 +10,6 @@ import org.apache.wicket.Session;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.bootstrap.Bootstrap;
 import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptHeaderItem;
-import org.apache.wicket.markup.head.PriorityHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -165,8 +163,9 @@ public abstract class TemplatePage extends WebPage {
 	@Override
 	public void renderHead(IHeaderResponse response) {
 		super.renderHead(response);
-		response.render(new PriorityHeaderItem(JavaScriptHeaderItem
-				.forReference(Bootstrap.get())));
+		Bootstrap.renderHead(response);
+		response.render(WicketUtils.loadJS(TemplatePage.class));
+		response.render(WicketUtils.loadCSS(TemplatePage.class));
 	}
 
 	protected abstract String getTitle();
