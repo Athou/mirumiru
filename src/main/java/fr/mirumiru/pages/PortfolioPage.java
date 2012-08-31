@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
@@ -16,6 +17,7 @@ import fr.mirumiru.components.LightBoxBehavior;
 import fr.mirumiru.model.Portfolio.PortfolioItem;
 import fr.mirumiru.services.PortfolioService;
 import fr.mirumiru.utils.Mount;
+import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
 @Mount(path = "portfolio", menu = "portfolio", menuOrder = 30)
@@ -53,6 +55,12 @@ public class PortfolioPage extends ContentPage {
 		protected List<PortfolioItem> load() {
 			return getBean(PortfolioService.class).getPortfolio().getItems();
 		}
+	}
+	
+	@Override
+	public void renderHead(IHeaderResponse response) {
+		super.renderHead(response);
+		response.render(WicketUtils.loadCSS(PortfolioPage.class));
 	}
 
 	@Override

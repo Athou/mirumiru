@@ -3,6 +3,7 @@ package fr.mirumiru.pages;
 import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
@@ -15,6 +16,7 @@ import com.restfb.types.Album;
 
 import fr.mirumiru.services.FacebookService;
 import fr.mirumiru.utils.Mount;
+import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
 @Mount(path = "albums", menu = "albums", menuOrder = 50)
@@ -47,6 +49,12 @@ public class GalleryListPage extends ContentPage {
 		protected List<Album> load() {
 			return getBean(FacebookService.class).getAlbums();
 		}
+	}
+	
+	@Override
+	public void renderHead(IHeaderResponse response) {
+		super.renderHead(response);
+		response.render(WicketUtils.loadCSS(GalleryListPage.class));
 	}
 
 	@Override
