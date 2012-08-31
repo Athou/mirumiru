@@ -1,13 +1,11 @@
-package fr.mirumiru.rss;
+package fr.mirumiru.pages;
 
-import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.handler.TextRequestHandler;
 
 import com.google.common.collect.Lists;
 import com.restfb.types.Post;
@@ -15,21 +13,21 @@ import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 
 import fr.mirumiru.MiruApplication;
+import fr.mirumiru.services.BundleService;
 import fr.mirumiru.services.FacebookService;
+import fr.mirumiru.utils.Mount;
 
-@SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/rss")
-public class RssServlet extends HttpServlet {
+@Mount(path = "rss")
+public class RssPage extends WebPage {
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	private static final long serialVersionUID = 1L;
 
-		resp.setContentType("text/xml");
+	private Logger log = Logger.getLogger(getClass());
+
+	public RssPage() {
 
 		MiruApplication app = MiruApplication.get();
 		FacebookService facebookService = app.getBean(FacebookService.class);
@@ -38,12 +36,9 @@ public class RssServlet extends HttpServlet {
 		SyndFeed feed = new SyndFeedImpl();
 		feed.setFeedType("rss_2.0");
 		feed.setTitle("Miru Miru");
-		String path = req.getScheme()
-				+ "://"
-				+ req.getServerName()
-				+ req.getRequestURI().substring(0,
-						req.getRequestURI().length() - 4);
-		feed.setLink(path);
+
+		String path = app.getBean(BundleService.class).getWebServerRootPath();
+		feed.setLink(path == null ? "" : path);
 		feed.setDescription("Miru Miru");
 
 		List<SyndEntry> entries = Lists.newArrayList();
@@ -60,11 +55,16 @@ public class RssServlet extends HttpServlet {
 		feed.setEntries(entries);
 		SyndFeedOutput output = new SyndFeedOutput();
 
+		StringWriter writer = new StringWriter();
 		try {
-			output.output(feed, resp.getWriter());
-		} catch (FeedException e) {
-			throw new IOException(e);
+			output.output(feed, writer);
+		} catch (Exception e) {
+			writer.write("Could not get feed information");
+			log.error(e.getMessage(), e);
 		}
+
+		getRequestCycle().scheduleRequestHandlerAfterCurrent(
+				new TextRequestHandler("text/xml", "UTF-8", writer.toString()));
 
 	}
 

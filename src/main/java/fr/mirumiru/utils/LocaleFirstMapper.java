@@ -1,5 +1,6 @@
 package fr.mirumiru.utils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -11,10 +12,11 @@ import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Url;
 
-
 public class LocaleFirstMapper implements IRequestMapper {
 
 	private final IRequestMapper chain;
+	private static final List<String> IGNORED_PATHS = Arrays.asList("wicket",
+			"sitemap.xml", "rss");
 
 	public LocaleFirstMapper(final IRequestMapper chain) {
 		this.chain = chain;
@@ -52,8 +54,7 @@ public class LocaleFirstMapper implements IRequestMapper {
 			}
 			List<String> segments = url.getSegments();
 			if (CollectionUtils.isNotEmpty(segments)
-					&& ("wicket".equals(segments.get(0)) || "sitemap.xml"
-							.equals(segments.get(0)))) {
+					&& IGNORED_PATHS.contains(segments.get(0))) {
 				// do nothing
 			} else {
 				url.getSegments().add(0, locale.getLanguage());
