@@ -12,6 +12,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.LoadableDetachableModel;
 
+import fr.mirumiru.components.LightBoxBehavior;
 import fr.mirumiru.model.Portfolio.PortfolioItem;
 import fr.mirumiru.services.PortfolioService;
 import fr.mirumiru.utils.Mount;
@@ -35,7 +36,7 @@ public class PortfolioPage extends ContentPage {
 				item.add(new Label("name", imageName));
 				item.add(new Label("desc", imageDesc == null ? "" : imageDesc));
 				ExternalLink link = new ExternalLink("link", imagePath + ".jpg");
-				link.add(new AttributeModifier("title", imageName
+				link.add(new LightBoxBehavior(imageName
 						+ (imageDesc == null ? "" : " (" + imageDesc + ")")));
 				item.add(link);
 				Component image = new WebMarkupContainer("image");
