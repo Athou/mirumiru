@@ -139,8 +139,6 @@
 			</resource>
 		</resources>
 
-		<!-- Maven will append the version to the finalName (which is the name 
-			given to the generated war, and hence the context root) -->
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
@@ -195,13 +193,6 @@
 		</profile>
 
 		<profile>
-			<!-- When built in OpenShift the 'openshift' profile will be used when 
-				invoking mvn. -->
-			<!-- Use this profile for any OpenShift specific customization your app 
-				will need. -->
-			<!-- By default that is to put the resulting archive into the 'deployments' 
-				folder. -->
-			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
 			<properties>
 				<webXmlPath>src/main/webapp/WEB-INF/web-prod.xml</webXmlPath>
