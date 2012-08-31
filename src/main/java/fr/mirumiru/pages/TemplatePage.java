@@ -15,18 +15,22 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.link.ResourceLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.request.resource.PackageResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 
 import com.google.common.collect.Lists;
 import com.restfb.types.Post;
 
 import fr.mirumiru.MiruApplication;
 import fr.mirumiru.components.FacebookPost;
+import fr.mirumiru.components.FaviconHeaderItem;
 import fr.mirumiru.model.PageModel;
 import fr.mirumiru.services.FacebookService;
 import fr.mirumiru.utils.WicketUtils;
@@ -54,8 +58,11 @@ public abstract class TemplatePage extends WebPage {
 					}
 				}));
 		add(html);
+
 		html.add(new Label("title", getLocalizedString(getTitle(), getTitle())));
 		html.add(new BookmarkablePageLink<HomePage>("logo-link", HomePage.class));
+		html.add(new BookmarkablePageLink<RssPage>("rss", RssPage.class));
+
 		addNavigationMenu();
 		addFacebookPosts();
 
@@ -166,6 +173,9 @@ public abstract class TemplatePage extends WebPage {
 		Bootstrap.renderHead(response);
 		response.render(WicketUtils.loadJS(TemplatePage.class));
 		response.render(WicketUtils.loadCSS(TemplatePage.class));
+		response.render(new FaviconHeaderItem(new PackageResourceReference(
+				TemplatePage.class, "images/favicon.ico")));
+
 	}
 
 	protected abstract String getTitle();
