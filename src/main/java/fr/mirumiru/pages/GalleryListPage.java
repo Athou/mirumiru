@@ -39,7 +39,7 @@ public class GalleryListPage extends ContentPage {
 
 			}
 		};
-		html.add(albumsView);
+		add(albumsView);
 	}
 
 	private class AlbumModel extends LoadableDetachableModel<List<Album>> {

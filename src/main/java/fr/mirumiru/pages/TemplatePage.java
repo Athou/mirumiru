@@ -10,12 +10,11 @@ import org.apache.wicket.Session;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.bootstrap.Bootstrap;
 import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.TransparentWebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.link.ResourceLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PropertyListView;
@@ -23,7 +22,6 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.request.resource.PackageResourceReference;
-import org.apache.wicket.request.resource.ResourceReference;
 
 import com.google.common.collect.Lists;
 import com.restfb.types.Post;
@@ -39,10 +37,9 @@ import fr.mirumiru.utils.WicketUtils.Language;
 @SuppressWarnings("serial")
 public abstract class TemplatePage extends WebPage {
 
-	protected WebMarkupContainer html;
-
 	public TemplatePage() {
-		html = new WebMarkupContainer("html");
+		TransparentWebMarkupContainer html = new TransparentWebMarkupContainer(
+				"html");
 		html.add(new AttributeModifier("lang",
 				new AbstractReadOnlyModel<String>() {
 					@Override
@@ -59,9 +56,9 @@ public abstract class TemplatePage extends WebPage {
 				}));
 		add(html);
 
-		html.add(new Label("title", getLocalizedString(getTitle(), getTitle())));
-		html.add(new BookmarkablePageLink<HomePage>("logo-link", HomePage.class));
-		html.add(new BookmarkablePageLink<RssPage>("rss", RssPage.class));
+		add(new Label("title", getLocalizedString(getTitle(), getTitle())));
+		add(new BookmarkablePageLink<HomePage>("logo-link", HomePage.class));
+		add(new BookmarkablePageLink<RssPage>("rss", RssPage.class));
 
 		addNavigationMenu();
 		addFacebookPosts();
@@ -98,10 +95,10 @@ public abstract class TemplatePage extends WebPage {
 			}
 		};
 
-		html.add(flags);
+		add(flags);
 
-		html.add(new BookmarkablePageLink<TemplatePage>("faq", FAQPage.class));
-		html.add(new BookmarkablePageLink<TemplatePage>("contactpage",
+		add(new BookmarkablePageLink<TemplatePage>("faq", FAQPage.class));
+		add(new BookmarkablePageLink<TemplatePage>("contactpage",
 				ContactPage.class));
 
 	}
@@ -138,7 +135,7 @@ public abstract class TemplatePage extends WebPage {
 						}));
 			}
 		};
-		html.add(entries);
+		add(entries);
 	}
 
 	private void addFacebookPosts() {
@@ -161,9 +158,9 @@ public abstract class TemplatePage extends WebPage {
 				item.add(new FacebookPost("post", post, 85));
 			}
 		};
-		html.add(posts);
+		add(posts);
 
-		html.add(new BookmarkablePageLink<TemplatePage>("more-news",
+		add(new BookmarkablePageLink<TemplatePage>("more-news",
 				FacebookNewsPage.class));
 	}
 

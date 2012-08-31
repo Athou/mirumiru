@@ -24,7 +24,7 @@ public class ContactPage extends ContentPage {
 	public ContactPage() {
 
 		final FeedbackPanel feedback = new BootstrapFeedbackPanel("feedback");
-		html.add(feedback);
+		add(feedback);
 
 		Form<Void> form = new StatelessForm<Void>("form") {
 			@Override
@@ -38,7 +38,7 @@ public class ContactPage extends ContentPage {
 				}
 			}
 		};
-		html.add(form);
+		add(form);
 
 		form.add(new RequiredTextField<String>("name",
 				new PropertyModel<String>(this, "name")));

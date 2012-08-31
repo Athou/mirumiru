@@ -66,17 +66,17 @@ public class FacebookNewsPage extends ContentPage {
 				item.add(new FacebookPost("post", post));
 			}
 		};
-		html.add(postsView);
+		add(postsView);
 
 		WebMarkupContainer newer = new WebMarkupContainer("newer");
 		newer.setVisible(page < pageMax);
-		html.add(newer);
+		add(newer);
 		newer.add(new BookmarkablePageLink<TemplatePage>("link",
 				getPageClass(), WicketUtils.buildParams("page", page + 1)));
 
 		WebMarkupContainer older = new WebMarkupContainer("older");
 		older.setVisible(page > 1);
-		html.add(older);
+		add(older);
 		older.add(new BookmarkablePageLink<TemplatePage>("link",
 				getPageClass(), WicketUtils.buildParams("page", page - 1)));
 

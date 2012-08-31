@@ -8,7 +8,7 @@ import fr.mirumiru.utils.Mount;
 public class LoginPage extends TemplatePage {
 
 	public LoginPage() {
-		html.add(new LoginPanel("login"));
+		add(new LoginPanel("login"));
 	}
 
 	@Override
