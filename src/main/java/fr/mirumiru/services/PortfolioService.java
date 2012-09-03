@@ -3,8 +3,8 @@ package fr.mirumiru.services;
 import java.io.InputStream;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 import fr.mirumiru.model.Portfolio;
 
-@Singleton
+@ApplicationScoped
 public class PortfolioService {
 
 	@Inject

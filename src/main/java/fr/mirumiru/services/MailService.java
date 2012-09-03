@@ -2,8 +2,8 @@ package fr.mirumiru.services;
 
 import java.util.Properties;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang.SystemUtils;
 
-@Singleton
+@ApplicationScoped
 public class MailService {
 
 	@Inject
