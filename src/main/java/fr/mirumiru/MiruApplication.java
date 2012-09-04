@@ -31,21 +31,19 @@ import fr.mirumiru.utils.LocaleFirstMapper;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 
-	BeanManager beanManager;
-
 	@Override
 	protected void init() {
 		super.init();
-		setupBeanManager();
+		setupCDI();
 		mountPages();
 		setRootRequestMapper(new LocaleFirstMapper(
 				getRootRequestMapperAsCompound()));
 
 	}
 
-	protected void setupBeanManager() {
+	protected void setupCDI() {
 		try {
-			beanManager = (BeanManager) new InitialContext()
+			BeanManager beanManager = (BeanManager) new InitialContext()
 					.lookup("java:comp/BeanManager");
 			new CdiConfiguration(beanManager).setPropagation(
 					ConversationPropagation.NONE).configure(this);
