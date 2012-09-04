@@ -1,13 +1,10 @@
 package fr.mirumiru;
 
-import java.util.List;
-
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 import junit.framework.Assert;
 
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.util.tester.WicketTester;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -20,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import fr.mirumiru.utils.Mount;
+import fr.mirumiru.model.PageModel;
 
 @RunWith(Arquillian.class)
 public class PagesTest {
@@ -31,6 +28,9 @@ public class PagesTest {
 
 	@Inject
 	BeanManager beanManager;
+
+	@Inject
+	MiruPages miruPages;
 
 	private WicketTester wicketTester;
 	private MiruApplication application;
@@ -58,13 +58,11 @@ public class PagesTest {
 
 	@Test
 	public void testHomePage() {
-		List<Class<WebPage>> pageClasses = application.getBeanClasses(
-				WebPage.class, Mount.class);
 
-		Assert.assertTrue(pageClasses.size() > 0);
+		Assert.assertTrue(miruPages.getMenuPages().size() > 0);
 
-		for (Class<WebPage> klass : pageClasses) {
-			wicketTester.startPage(klass);
+		for (PageModel pageModel : miruPages.getMenuPages()) {
+			wicketTester.startPage(pageModel.getPageClass());
 		}
 
 	}

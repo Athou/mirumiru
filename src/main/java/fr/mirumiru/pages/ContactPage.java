@@ -1,5 +1,7 @@
 package fr.mirumiru.pages;
 
+import javax.inject.Inject;
+
 import org.apache.wicket.markup.html.form.EmailTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -11,11 +13,12 @@ import org.apache.wicket.validation.validator.StringValidator;
 
 import fr.mirumiru.components.BootstrapFeedbackPanel;
 import fr.mirumiru.services.MailService;
-import fr.mirumiru.utils.Mount;
 
 @SuppressWarnings("serial")
-@Mount(path = "contact", menu = "contact", menuOrder = 70)
 public class ContactPage extends ContentPage {
+
+	@Inject
+	MailService mailService;
 
 	private String name;
 	private String email;
@@ -30,7 +33,7 @@ public class ContactPage extends ContentPage {
 			@Override
 			protected void onSubmit() {
 				try {
-					getBean(MailService.class).sendMail(name, email, message);
+					mailService.sendMail(name, email, message);
 					info("Message sent successfully !");
 				} catch (Exception e) {
 					getLog().error("Could not send email", e);

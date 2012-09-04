@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.MarkupType;
 import org.apache.wicket.markup.html.WebPage;
@@ -15,19 +17,23 @@ import org.apache.wicket.request.Url;
 
 import com.google.common.collect.Lists;
 
-import fr.mirumiru.MiruApplication;
+import fr.mirumiru.MiruPages;
 import fr.mirumiru.model.PageModel;
 import fr.mirumiru.services.StartupBean;
-import fr.mirumiru.utils.Mount;
 import fr.mirumiru.utils.WicketUtils;
 import fr.mirumiru.utils.WicketUtils.Language;
 
 @SuppressWarnings("serial")
-@Mount(path = "sitemap.xml")
 public class SitemapPage extends WebPage {
 
+	@Inject
+	StartupBean startupBean;
+
+	@Inject
+	MiruPages miruPages;
+
 	public SitemapPage() {
-		List<PageModel> pages = WicketUtils.getMenuPages();
+		List<PageModel> pages = miruPages.getMenuPages();
 		List<ExtendedPageModel> model = Lists.newArrayList();
 		for (PageModel page : pages) {
 			for (Language lang : WicketUtils.Language.values()) {
@@ -45,8 +51,7 @@ public class SitemapPage extends WebPage {
 						Url.parse(getRequestCycle().urlFor(page.getPageClass(),
 								null).toString()));
 
-				Calendar startupTime = getBean(StartupBean.class)
-						.getStartupTime();
+				Calendar startupTime = startupBean.getStartupTime();
 
 				item.add(new Label("loc", url));
 				item.add(new Label("lastmod",
@@ -62,16 +67,12 @@ public class SitemapPage extends WebPage {
 		return new MarkupType("xml", MarkupType.XML_MIME);
 	}
 
-	public <T> T getBean(Class<? extends T> klass) {
-		return MiruApplication.get().getBean(klass);
-	}
-
 	private class ExtendedPageModel extends PageModel {
 
 		private Locale locale;
 
 		public ExtendedPageModel(PageModel model, Locale locale) {
-			super(model.getName(), model.getMenuOrder(), model.getPageClass());
+			super(model.getName(), model.getPageClass());
 			this.locale = locale;
 		}
 

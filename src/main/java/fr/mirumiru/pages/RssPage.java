@@ -3,6 +3,8 @@ package fr.mirumiru.pages;
 import java.io.StringWriter;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.log4j.Logger;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.handler.TextRequestHandler;
@@ -15,29 +17,30 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.SyndFeedOutput;
 
-import fr.mirumiru.MiruApplication;
 import fr.mirumiru.services.BundleService;
 import fr.mirumiru.services.FacebookService;
-import fr.mirumiru.utils.Mount;
 
-@Mount(path = "rss")
 public class RssPage extends WebPage {
 
 	private static final long serialVersionUID = 1L;
+
+	@Inject
+	BundleService bundleService;
+
+	@Inject
+	FacebookService facebookService;
 
 	private Logger log = Logger.getLogger(getClass());
 
 	public RssPage() {
 
-		MiruApplication app = MiruApplication.get();
-		FacebookService facebookService = app.getBean(FacebookService.class);
 		List<Post> list = facebookService.getPosts();
 
 		SyndFeed feed = new SyndFeedImpl();
 		feed.setFeedType("rss_2.0");
 		feed.setTitle("Miru Miru");
 
-		String path = app.getBean(BundleService.class).getWebServerRootPath();
+		String path = bundleService.getWebServerRootPath();
 		feed.setLink(path == null ? "" : path);
 		feed.setDescription("Miru Miru");
 

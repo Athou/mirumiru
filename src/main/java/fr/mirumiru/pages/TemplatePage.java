@@ -3,6 +3,8 @@ package fr.mirumiru.pages;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.log4j.Logger;
 import org.apache.wicket.Application;
 import org.apache.wicket.AttributeModifier;
@@ -26,7 +28,7 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 import com.google.common.collect.Lists;
 import com.restfb.types.Post;
 
-import fr.mirumiru.MiruApplication;
+import fr.mirumiru.MiruPages;
 import fr.mirumiru.components.FacebookPost;
 import fr.mirumiru.components.FaviconHeaderItem;
 import fr.mirumiru.model.PageModel;
@@ -36,6 +38,12 @@ import fr.mirumiru.utils.WicketUtils.Language;
 
 @SuppressWarnings("serial")
 public abstract class TemplatePage extends WebPage {
+
+	@Inject
+	FacebookService facebookService;
+
+	@Inject
+	MiruPages miruPages;
 
 	public TemplatePage() {
 		TransparentWebMarkupContainer html = new TransparentWebMarkupContainer(
@@ -104,7 +112,7 @@ public abstract class TemplatePage extends WebPage {
 	}
 
 	protected List<PageModel> getMenuPages() {
-		return WicketUtils.getMenuPages();
+		return miruPages.getMenuPages();
 	}
 
 	private void addNavigationMenu() {
@@ -143,7 +151,7 @@ public abstract class TemplatePage extends WebPage {
 		LoadableDetachableModel<List<Post>> model = new LoadableDetachableModel<List<Post>>() {
 			@Override
 			protected List<Post> load() {
-				List<Post> posts = getBean(FacebookService.class).getPosts();
+				List<Post> posts = facebookService.getPosts();
 				if (posts.size() > 2) {
 					posts = posts.subList(0, 2);
 				}
@@ -176,10 +184,6 @@ public abstract class TemplatePage extends WebPage {
 	}
 
 	protected abstract String getTitle();
-
-	public <T> T getBean(Class<? extends T> klass) {
-		return MiruApplication.get().getBean(klass);
-	}
 
 	public Logger getLog() {
 		return Logger.getLogger(getClass());

@@ -17,7 +17,7 @@ public abstract class AdminTemplatePage extends TemplatePage {
 	@Override
 	protected List<PageModel> getMenuPages() {
 		List<PageModel> pages = Lists.newArrayList();
-		pages.add(new PageModel("Admin Home", 0, AdminHomePage.class));
+		pages.add(new PageModel("Admin Home", AdminHomePage.class));
 		return pages;
 	}
 

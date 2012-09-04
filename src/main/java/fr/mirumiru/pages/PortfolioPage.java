@@ -2,6 +2,8 @@ package fr.mirumiru.pages;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -16,12 +18,13 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import fr.mirumiru.components.LightBoxBehavior;
 import fr.mirumiru.model.Portfolio.PortfolioItem;
 import fr.mirumiru.services.PortfolioService;
-import fr.mirumiru.utils.Mount;
 import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
-@Mount(path = "portfolio", menu = "portfolio", menuOrder = 30)
 public class PortfolioPage extends ContentPage {
+
+	@Inject
+	PortfolioService portfolioService;
 
 	public PortfolioPage() {
 
@@ -53,10 +56,10 @@ public class PortfolioPage extends ContentPage {
 			LoadableDetachableModel<List<PortfolioItem>> {
 		@Override
 		protected List<PortfolioItem> load() {
-			return getBean(PortfolioService.class).getPortfolio().getItems();
+			return portfolioService.getPortfolio().getItems();
 		}
 	}
-	
+
 	@Override
 	public void renderHead(IHeaderResponse response) {
 		super.renderHead(response);

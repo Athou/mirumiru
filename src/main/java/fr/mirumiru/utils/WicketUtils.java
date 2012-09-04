@@ -1,8 +1,5 @@
 package fr.mirumiru.utils;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
@@ -11,12 +8,6 @@ import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
-
-import com.google.common.collect.Lists;
-
-import fr.mirumiru.MiruApplication;
-import fr.mirumiru.model.PageModel;
-import fr.mirumiru.pages.TemplatePage;
 
 public class WicketUtils {
 
@@ -61,32 +52,6 @@ public class WicketUtils {
 			}
 			return supported;
 		}
-	}
-
-	private static List<PageModel> menuPages;
-
-	public static List<PageModel> getMenuPages() {
-		if (menuPages == null) {
-			List<PageModel> list = Lists.newArrayList();
-			List<Class<TemplatePage>> pageClasses = MiruApplication.get()
-					.getBeanClasses(TemplatePage.class, Mount.class);
-			for (Class<TemplatePage> klass : pageClasses) {
-				Mount mount = klass.getAnnotation(Mount.class);
-				String menu = mount.menu();
-				int menuOrder = mount.menuOrder();
-				if (StringUtils.isNotBlank(menu)) {
-					list.add(new PageModel(menu, menuOrder, klass));
-				}
-			}
-			Collections.sort(list, new Comparator<PageModel>() {
-				@Override
-				public int compare(PageModel o1, PageModel o2) {
-					return o1.getMenuOrder() - o2.getMenuOrder();
-				}
-			});
-			menuPages = list;
-		}
-		return menuPages;
 	}
 
 	public static PageParameters buildParams(String key, Object value) {

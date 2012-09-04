@@ -2,11 +2,9 @@ package fr.mirumiru.pages;
 
 import org.apache.wicket.markup.head.IHeaderResponse;
 
-import fr.mirumiru.utils.Mount;
 import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
-@Mount(path = "", menu = "home", menuOrder = 0)
 public class HomePage extends TemplatePage {
 
 	@Override

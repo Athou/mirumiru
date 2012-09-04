@@ -2,6 +2,8 @@ package fr.mirumiru.pages;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -14,14 +16,15 @@ import com.restfb.types.Post;
 
 import fr.mirumiru.components.FacebookPost;
 import fr.mirumiru.services.FacebookService;
-import fr.mirumiru.utils.Mount;
 import fr.mirumiru.utils.WicketUtils;
 
 @SuppressWarnings("serial")
-@Mount(path = "news/#{page}", menu = "news", menuOrder = 20)
 public class FacebookNewsPage extends ContentPage {
 
 	private static final int NEWS_PER_PAGE = 3;
+
+	@Inject
+	FacebookService facebookService;
 
 	private int page;
 
@@ -32,7 +35,7 @@ public class FacebookNewsPage extends ContentPage {
 	public FacebookNewsPage(PageParameters params) {
 		page = params.get("page").toInt(-1);
 
-		List<Post> posts = getBean(FacebookService.class).getPosts();
+		List<Post> posts = facebookService.getPosts();
 		int pageMax = calculatePageMax(posts);
 
 		if (posts.isEmpty()) {
@@ -48,7 +51,7 @@ public class FacebookNewsPage extends ContentPage {
 		IModel<List<Post>> model = new LoadableDetachableModel<List<Post>>() {
 			@Override
 			protected List<Post> load() {
-				List<Post> posts = getBean(FacebookService.class).getPosts();
+				List<Post> posts = facebookService.getPosts();
 				int pageMax = calculatePageMax(posts);
 
 				int lastIndex = posts.size() - 1;

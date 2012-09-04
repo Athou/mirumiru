@@ -11,10 +11,7 @@ import org.apache.wicket.model.LoadableDetachableModel;
 
 import com.google.common.collect.Lists;
 
-import fr.mirumiru.utils.Mount;
-
 @SuppressWarnings("serial")
-@Mount(path = "faq", menu = "faq", menuOrder = 60)
 public class FAQPage extends ContentPage {
 
 	public FAQPage() {

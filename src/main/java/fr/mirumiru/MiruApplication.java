@@ -1,29 +1,33 @@
 package fr.mirumiru;
 
-import java.lang.annotation.Annotation;
-import java.util.List;
-import java.util.Set;
-
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.commons.lang.StringUtils;
+import net.ftlines.wicket.cdi.CdiConfiguration;
+import net.ftlines.wicket.cdi.ConversationPropagation;
+
 import org.apache.wicket.Application;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
 
-import com.google.common.collect.Lists;
-
 import fr.mirumiru.auth.LoginPage;
+import fr.mirumiru.auth.LogoutPage;
 import fr.mirumiru.auth.MiruSession;
+import fr.mirumiru.pages.AboutPage;
+import fr.mirumiru.pages.ContactPage;
+import fr.mirumiru.pages.CrochetInfoPage;
+import fr.mirumiru.pages.Error404Page;
+import fr.mirumiru.pages.FAQPage;
+import fr.mirumiru.pages.FacebookNewsPage;
+import fr.mirumiru.pages.GalleryListPage;
 import fr.mirumiru.pages.HomePage;
+import fr.mirumiru.pages.PortfolioPage;
+import fr.mirumiru.pages.RssPage;
+import fr.mirumiru.pages.SitemapPage;
 import fr.mirumiru.utils.LocaleFirstMapper;
-import fr.mirumiru.utils.Mount;
 
 public class MiruApplication extends AuthenticatedWebApplication {
 
@@ -43,6 +47,8 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		try {
 			beanManager = (BeanManager) new InitialContext()
 					.lookup("java:comp/BeanManager");
+			new CdiConfiguration(beanManager).setPropagation(
+					ConversationPropagation.NONE).configure(this);
 		} catch (NamingException e) {
 			throw new IllegalStateException("Unable to obtain CDI BeanManager",
 					e);
@@ -50,41 +56,25 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	}
 
 	private void mountPages() {
-		for (Class<WebPage> klass : getBeanClasses(WebPage.class, Mount.class)) {
-			Mount mount = klass.getAnnotation(Mount.class);
-			String path = mount.path();
-			if (StringUtils.isNotBlank(path)) {
-				mountPage(path, klass);
-			}
-		}
+
+		mountPage("login", LoginPage.class);
+		mountPage("logout", LogoutPage.class);
+		mountPage("404", Error404Page.class);
+		mountPage("sitemap.xml", SitemapPage.class);
+		mountPage("rss", RssPage.class);
+
+		mountPage("about", AboutPage.class);
+		mountPage("news/#{page}", FacebookNewsPage.class);
+		mountPage("portfolio", PortfolioPage.class);
+		mountPage("crochet", CrochetInfoPage.class);
+		mountPage("albums", GalleryListPage.class);
+		mountPage("faq", FAQPage.class);
+		mountPage("contact", ContactPage.class);
+
 	}
 
 	public static MiruApplication get() {
 		return (MiruApplication) Application.get();
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> T getBean(Class<? extends T> klass) {
-		Set<Bean<?>> beans = beanManager.getBeans(klass);
-		Bean<?> bean = beanManager.resolve(beans);
-		CreationalContext<?> creationalContext = beanManager
-				.createCreationalContext(bean);
-		T result = (T) beanManager.getReference(bean, klass, creationalContext);
-		return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> List<Class<T>> getBeanClasses(Class<? extends T> klass,
-			Class<? extends Annotation> annotation) {
-		List<Class<T>> list = Lists.newArrayList();
-		Set<Bean<?>> beans = beanManager.getBeans(klass);
-		for (Bean<?> bean : beans) {
-			Class<?> beanClass = bean.getBeanClass();
-			if (beanClass.isAnnotationPresent(annotation)) {
-				list.add((Class<T>) beanClass);
-			}
-		}
-		return list;
 	}
 
 	@Override
