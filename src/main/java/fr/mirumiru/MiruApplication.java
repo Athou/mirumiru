@@ -27,6 +27,7 @@ import fr.mirumiru.pages.HomePage;
 import fr.mirumiru.pages.PortfolioPage;
 import fr.mirumiru.pages.RssPage;
 import fr.mirumiru.pages.SitemapPage;
+import fr.mirumiru.pages.UpdatePage;
 import fr.mirumiru.utils.LocaleFirstMapper;
 
 public class MiruApplication extends AuthenticatedWebApplication {
@@ -60,6 +61,7 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		mountPage("404", Error404Page.class);
 		mountPage("sitemap.xml", SitemapPage.class);
 		mountPage("rss", RssPage.class);
+		mountPage("update", UpdatePage.class);
 
 		mountPage("about", AboutPage.class);
 		mountPage("news/#{page}", FacebookNewsPage.class);

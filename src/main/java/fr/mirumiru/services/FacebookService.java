@@ -40,9 +40,9 @@ public class FacebookService {
 		return cache.getPosts();
 	}
 
-	@Schedule(hour = "*", persistent = false)
+	//@Schedule(hour = "*", persistent = false)
 	@PostConstruct
-	private void refresh() {
+	public void refresh() {
 		cache = new FacebookCache(new ArrayList<Album>(), new ArrayList<Post>());
 		try {
 			log.info("Refreshing album list from Facebook");
