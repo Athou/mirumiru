@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.6</version>
+			<version>1.7</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.6</version>
+			<version>1.7.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
@@ -81,6 +81,16 @@
 			<version>${wicket.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>net.ftlines.wicket-cdi</groupId>
+			<artifactId>wicket-cdi</artifactId>
+			<version>6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.seam.conversation</groupId>
+			<artifactId>seam-conversation-weld</artifactId>
+			<version>3.0.0.Final</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-bootstrap</artifactId>
 			<version>0.2</version>
@@ -88,24 +98,13 @@
 		<dependency>
 			<groupId>com.restfb</groupId>
 			<artifactId>restfb</artifactId>
-			<version>1.6.10</version>
+			<version>1.6.11</version>
 		</dependency>
 		<dependency>
 			<groupId>net.java.dev.rome</groupId>
 			<artifactId>rome</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>net.ftlines.wicket-cdi</groupId>
-			<artifactId>wicket-cdi</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.seam.conversation</groupId>
-			<artifactId>seam-conversation-weld</artifactId>
-			<version>3.0.0.Final</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>junit</groupId>
