@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
@@ -40,36 +39,46 @@ public class FacebookService {
 		return cache.getPosts();
 	}
 
-	//@Schedule(hour = "*", persistent = false)
+	// @Schedule(hour = "*", persistent = false)
 	@PostConstruct
 	public void refresh() {
-		cache = new FacebookCache(new ArrayList<Album>(), new ArrayList<Post>());
+		List<Album> albums = new ArrayList<Album>();
+		List<Post> posts = new ArrayList<Post>();
+		cache = new FacebookCache(albums, posts);
+
 		try {
 			log.info("Refreshing album list from Facebook");
+			FacebookClient client = new DefaultFacebookClient();
+
+			Connection<Album> albumConnection = client.fetchConnection(
+					"127903530580737/albums", Album.class);
+			albums = new ArrayList<Album>(albumConnection.getData());
+			Collections.sort(albums, new Comparator<Album>() {
+				@Override
+				public int compare(Album o1, Album o2) {
+					return o2.getCreatedTime().compareTo(o1.getCreatedTime());
+				}
+			});
+
+		} catch (Exception e) {
+			log.fatal("Could not refresh facebook albums", e);
+		}
+
+		try {
+			log.info("Refreshing news list from Facebook");
+
 			String token = bundle.getFacebookAuthToken();
 			if (StringUtils.isNotBlank(token)) {
 				FacebookClient client = new DefaultFacebookClient(token);
 
-				Connection<Album> albumConnection = client.fetchConnection(
-						"127903530580737/albums", Album.class);
-				List<Album> albums = new ArrayList<Album>(
-						albumConnection.getData());
-				Collections.sort(albums, new Comparator<Album>() {
-					@Override
-					public int compare(Album o1, Album o2) {
-						return o2.getCreatedTime().compareTo(
-								o1.getCreatedTime());
-					}
-				});
-
 				Connection<Post> postConnection = client.fetchConnection(
 						"127903530580737/statuses&limit=1000", Post.class);
-				List<Post> posts = new ArrayList<Post>(postConnection.getData());
-				cache = new FacebookCache(albums, posts);
+				posts = new ArrayList<Post>(postConnection.getData());
 			}
 		} catch (Exception e) {
-			log.fatal("Could not refresh facebook infos", e);
+			log.fatal("Could not refresh facebook news", e);
 		}
+		cache = new FacebookCache(albums, posts);
 
 	}
 
