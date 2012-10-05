@@ -2,8 +2,8 @@ package fr.mirumiru;
 
 import javax.enterprise.inject.spi.BeanManager;
 
-import net.ftlines.wicket.cdi.CdiConfiguration;
-import net.ftlines.wicket.cdi.ConversationPropagation;
+import org.apache.wicket.cdi.CdiConfiguration;
+import org.apache.wicket.cdi.ConversationPropagation;
 
 public class MiruTestApplication extends MiruApplication {
 
