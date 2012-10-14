@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<wicket.version>6.1.0</wicket.version>
+		<wicket.version>6.1.1</wicket.version>
 		<webXmlPath>src/main/webapp/WEB-INF/web.xml</webXmlPath>
 	</properties>
 
@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.1</version>
+			<version>1.7.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
