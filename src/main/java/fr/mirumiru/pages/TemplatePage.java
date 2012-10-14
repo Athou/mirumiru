@@ -46,6 +46,7 @@ public abstract class TemplatePage extends WebPage {
 	MiruPages miruPages;
 
 	public TemplatePage() {
+
 		TransparentWebMarkupContainer html = new TransparentWebMarkupContainer(
 				"html");
 		html.add(new AttributeModifier("lang",

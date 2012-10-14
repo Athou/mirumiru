@@ -1,9 +1,9 @@
 .gallery .gallery-div {
-	height: 222px;
+	height: 190px;
 }
 
 .gallery .thumbnail img {
-	height: 150px;
+	/*height: 150px;*/
 }
 
 div.thumbnail:hover {
