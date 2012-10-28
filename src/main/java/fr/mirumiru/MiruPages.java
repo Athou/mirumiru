@@ -8,9 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import com.google.common.collect.Lists;
 
 import fr.mirumiru.model.PageModel;
-import fr.mirumiru.pages.AboutPage;
 import fr.mirumiru.pages.ContactPage;
-import fr.mirumiru.pages.CrochetInfoPage;
 import fr.mirumiru.pages.FAQPage;
 import fr.mirumiru.pages.FacebookNewsPage;
 import fr.mirumiru.pages.GalleryListPage;
