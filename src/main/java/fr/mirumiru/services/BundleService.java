@@ -39,8 +39,12 @@ public class BundleService {
 		}
 	}
 
-	public String getFacebookAuthToken() {
-		return getProperty("facebook.authtoken");
+	public String getFacebookAppId() {
+		return getProperty("facebook.appid");
+	}
+
+	public String getFacebookAppSecret() {
+		return getProperty("facebook.appsecret");
 	}
 
 	public String getSmtpGmailUserName() {
@@ -54,7 +58,7 @@ public class BundleService {
 	public String getMailDest() {
 		return getProperty("mail.dest");
 	}
-	
+
 	public String getWebServerRootPath() {
 		return getProperty("web");
 	}
@@ -65,7 +69,5 @@ public class BundleService {
 		}
 		return props.getProperty(name);
 	}
-
-
 
 }
