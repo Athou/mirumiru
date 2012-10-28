@@ -25,7 +25,7 @@ public class LightBoxReference extends JavaScriptResourceReference {
 	@Override
 	public Iterable<? extends HeaderItem> getDependencies() {
 		List<HeaderItem> list = Lists.newArrayList();
-		list.add(JavaScriptHeaderItem.forReference(Bootstrap.get()));
+		list.add(JavaScriptHeaderItem.forReference(Bootstrap.responsive()));
 		list.add(CssHeaderItem.forReference(new CssResourceReference(
 				LightBoxReference.class, "jquery.lightbox-0.5.css")));
 		return list;

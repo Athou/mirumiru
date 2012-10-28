@@ -5,17 +5,21 @@
 	<wicket:extend>
 		<div class="row">
 			<div class="page-header">
-				<h1><wicket:message key="albums"/></h1>
+				<h1>
+					<wicket:message key="albums" />
+				</h1>
 			</div>
 			<ul class="thumbnails gallery">
 				<li class="span2" wicket:id="albums">
 					<div class="thumbnail center gallery-div">
 						<a href="#" wicket:id="link" target="_blank" class="minizoom">
-			            	<img src="#" wicket:id="coverPhoto" />
-		            	</a>
+							<img src="#" wicket:id="coverPhoto" />
+						</a>
 						<div class="caption">
-							<h5><span wicket:id="name" ></span></h5>
-							<h5><small><span wicket:id="count" ></span> photos</small></h5>
+							<div>
+								<strong wicket:id="name"></strong>
+							</div>
+							<small><span wicket:id="count"></span> photos</small>
 						</div>
 					</div>
 				</li>
