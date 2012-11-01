@@ -15,7 +15,8 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.LoadableDetachableModel;
 
-import fr.mirumiru.components.LightBoxBehavior;
+import fr.mirumiru.components.FancyBoxBehavior;
+import fr.mirumiru.components.references.hashchange.HashChangeReference;
 import fr.mirumiru.model.Portfolio.PortfolioItem;
 import fr.mirumiru.services.PortfolioService;
 import fr.mirumiru.utils.WicketUtils;
@@ -41,8 +42,12 @@ public class PortfolioPage extends ContentPage {
 				item.add(new Label("name", imageName));
 				item.add(new Label("desc", imageDesc == null ? "" : imageDesc));
 				ExternalLink link = new ExternalLink("link", imagePath + ".jpg");
-				link.add(new LightBoxBehavior(imageName
-						+ (imageDesc == null ? "" : " (" + imageDesc + ")")));
+				link.setMarkupId(portfolioItem.getImage());
+
+				String title = imageName
+						+ (imageDesc == null ? "" : " (" + imageDesc + ")");
+				String onclose = "$.fancybox.close(true)";
+				link.add(new FancyBoxBehavior(title, onclose));
 				item.add(link);
 				Component image = new WebMarkupContainer("image");
 				image.add(new AttributeModifier("src", imagePath + "_tn.jpg"));
@@ -63,6 +68,8 @@ public class PortfolioPage extends ContentPage {
 	@Override
 	public void renderHead(IHeaderResponse response) {
 		super.renderHead(response);
+		HashChangeReference.render(response);
+		response.render(WicketUtils.loadJS(PortfolioPage.class));
 		response.render(WicketUtils.loadCSS(PortfolioPage.class));
 	}
 

@@ -1,33 +1,29 @@
-package fr.mirumiru.components.references.lightbox;
+package fr.mirumiru.components.references.hashchange;
 
 import java.util.List;
 
 import org.apache.wicket.bootstrap.Bootstrap;
-import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
-import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import com.google.common.collect.Lists;
 
-public class LightBoxReference extends JavaScriptResourceReference {
+public class HashChangeReference extends JavaScriptResourceReference {
 
 	private static final long serialVersionUID = 1L;
 
-	private static LightBoxReference instance = new LightBoxReference();
+	private static HashChangeReference instance = new HashChangeReference();
 
-	public LightBoxReference() {
-		super(LightBoxReference.class, "jquery.lightbox-0.5.pack.js");
+	public HashChangeReference() {
+		super(HashChangeReference.class, "jquery.ba-hashchange.min.js");
 	}
 
 	@Override
 	public Iterable<? extends HeaderItem> getDependencies() {
 		List<HeaderItem> list = Lists.newArrayList();
 		list.add(JavaScriptHeaderItem.forReference(Bootstrap.responsive()));
-		list.add(CssHeaderItem.forReference(new CssResourceReference(
-				LightBoxReference.class, "jquery.lightbox-0.5.css")));
 		return list;
 	}
 

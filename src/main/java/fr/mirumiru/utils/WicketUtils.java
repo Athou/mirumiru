@@ -1,13 +1,19 @@
 package fr.mirumiru.utils;
 
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.markup.head.CssReferenceHeaderItem;
+import org.apache.wicket.markup.head.HeaderItem;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import org.apache.wicket.util.io.IOUtils;
+import org.apache.wicket.util.template.PackageTextTemplate;
+import org.apache.wicket.util.template.TextTemplate;
 
 public class WicketUtils {
 
@@ -66,6 +72,14 @@ public class WicketUtils {
 		return JavaScriptReferenceHeaderItem
 				.forReference(new JavaScriptResourceReference(klass, klass
 						.getSimpleName() + ".js"));
+	}
+
+	public static HeaderItem loadJS(Class<?> klass, Map<String, Object> map) {
+		TextTemplate template = new PackageTextTemplate(klass,
+				klass.getSimpleName() + ".js");
+		String script = template.asString(map);
+		IOUtils.closeQuietly(template);
+		return OnDomReadyHeaderItem.forScript(script);
 	}
 
 	public static CssReferenceHeaderItem loadCSS(Class<?> klass) {
