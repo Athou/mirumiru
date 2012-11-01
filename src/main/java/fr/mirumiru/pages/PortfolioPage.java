@@ -46,8 +46,7 @@ public class PortfolioPage extends ContentPage {
 
 				String title = imageName
 						+ (imageDesc == null ? "" : " (" + imageDesc + ")");
-				String onclose = "$.fancybox.close(true)";
-				link.add(new FancyBoxBehavior(title, onclose));
+				link.add(new FancyBoxBehavior(title));
 				item.add(link);
 				Component image = new WebMarkupContainer("image");
 				image.add(new AttributeModifier("src", imagePath + "_tn.jpg"));
