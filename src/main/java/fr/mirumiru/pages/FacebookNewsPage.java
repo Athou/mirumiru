@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -67,6 +68,8 @@ public class FacebookNewsPage extends ContentPage {
 			protected void populateItem(ListItem<Post> item) {
 				Post post = item.getModelObject();
 				item.add(new FacebookPost("post", post));
+				item.add(new WebMarkupContainer("separator").setVisible(item
+						.getIndex() != NEWS_PER_PAGE - 1));
 			}
 		};
 		add(postsView);
@@ -92,5 +95,11 @@ public class FacebookNewsPage extends ContentPage {
 	@Override
 	protected String getTitle() {
 		return "news";
+	}
+
+	@Override
+	public void renderHead(IHeaderResponse response) {
+		super.renderHead(response);
+		response.render(WicketUtils.loadCSS(FacebookNewsPage.class));
 	}
 }
