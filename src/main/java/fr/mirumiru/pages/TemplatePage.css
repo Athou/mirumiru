@@ -68,6 +68,10 @@ body {
 }
 
 /* Bootstrap customization */
+a {
+	color: #007ACC;
+}
+
 .well {
 	background-color: transparent;
 }
