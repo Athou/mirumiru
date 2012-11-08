@@ -13,14 +13,15 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang.SystemUtils;
 
+import fr.mirumiru.model.ContactMail;
+
 @ApplicationScoped
 public class MailService {
 
 	@Inject
 	BundleService bundle;
 
-	public void sendMail(String name, String email, String content)
-			throws Exception {
+	public void sendMail(ContactMail mail) throws Exception {
 		final String username = bundle.getSmtpGmailUserName();
 		final String password = bundle.getSmtpGmailPassword();
 		String dest = bundle.getMailDest();
@@ -39,11 +40,13 @@ public class MailService {
 				});
 
 		Message message = new MimeMessage(session);
-		message.setFrom(new InternetAddress(email, name));
+		message.setFrom(new InternetAddress(mail.getEmail(), mail.getName()));
 		message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(dest));
-		message.setSubject("Message from " + name + " via mirumiru.fr");
-		message.setText(buildContent(name, email, content));
+		message.setSubject("Message from " + mail.getName()
+				+ " via mirumiru.fr");
+		message.setText(buildContent(mail.getName(), mail.getEmail(),
+				mail.getMessage()));
 
 		Transport.send(message);
 
