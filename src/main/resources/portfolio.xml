@@ -1,6 +1,10 @@
 <portfolio>
 
 	<!-- Original -->
+	<item image="hippo">
+		<name lang="en" name="Hippo Family" />
+		<name lang="fr" name="Famille Hippo" />
+	</item>
 	<item image="petit_poulpe">
 		<name lang="en" name="Small Octopus" />
 		<name lang="fr" name="Petit Poulpe" />
