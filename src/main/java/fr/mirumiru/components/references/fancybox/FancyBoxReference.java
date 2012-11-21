@@ -25,7 +25,7 @@ public class FancyBoxReference extends JavaScriptResourceReference {
 	@Override
 	public Iterable<? extends HeaderItem> getDependencies() {
 		List<HeaderItem> list = Lists.newArrayList();
-		list.add(JavaScriptHeaderItem.forReference(Bootstrap.responsive()));
+		list.add(JavaScriptHeaderItem.forReference(Bootstrap.plain()));
 		list.add(CssHeaderItem.forReference(new CssResourceReference(
 				FancyBoxReference.class, "jquery.fancybox.css")));
 		return list;

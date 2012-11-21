@@ -176,7 +176,7 @@ public abstract class TemplatePage extends WebPage {
 	@Override
 	public void renderHead(IHeaderResponse response) {
 		super.renderHead(response);
-		Bootstrap.renderHeadResponsive(response);
+		Bootstrap.renderHeadPlain(response);
 		response.render(WicketUtils.loadJS(TemplatePage.class));
 		response.render(WicketUtils.loadCSS(TemplatePage.class));
 		response.render(new FaviconHeaderItem(new PackageResourceReference(

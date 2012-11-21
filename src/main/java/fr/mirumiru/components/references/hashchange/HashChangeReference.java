@@ -23,7 +23,7 @@ public class HashChangeReference extends JavaScriptResourceReference {
 	@Override
 	public Iterable<? extends HeaderItem> getDependencies() {
 		List<HeaderItem> list = Lists.newArrayList();
-		list.add(JavaScriptHeaderItem.forReference(Bootstrap.responsive()));
+		list.add(JavaScriptHeaderItem.forReference(Bootstrap.plain()));
 		return list;
 	}
 
