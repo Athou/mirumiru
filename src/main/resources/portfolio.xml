@@ -73,9 +73,9 @@
 		<name lang="en" name="Brain Slug" desc="Futurama" />
 		<name lang="fr" name="Suceur de cerveau" desc="Futurama" />
 	</item>
-	<item image="sam">
-		<name lang="en" name="Sam" desc="Sam &amp; Max" />
-		<name lang="fr" name="Sam" desc="Sam &amp; Max" />
+	<item image="max">
+		<name lang="en" name="Max" desc="Sam &amp; Max" />
+		<name lang="fr" name="Max" desc="Sam &amp; Max" />
 	</item>
 	<item image="violet">
 		<name lang="en" name="Purple" desc="Day of the Tentacle" />
