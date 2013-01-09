@@ -12,11 +12,16 @@ import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Url;
 
+import fr.mirumiru.MiruApplication;
+import fr.mirumiru.pages.RssPage;
+import fr.mirumiru.pages.SitemapPage;
+
 public class LocaleFirstMapper implements IRequestMapper {
 
 	private final IRequestMapper chain;
-	private static final List<String> IGNORED_PATHS = Arrays.asList("wicket",
-			"sitemap.xml", "rss");
+	private static final List<String> IGNORED_PATHS = Arrays.asList(
+			MiruApplication.RESOURCES_PREFIX_URL, SitemapPage.SITEMAP_PATH,
+			RssPage.RSS_PATH);
 
 	public LocaleFirstMapper(final IRequestMapper chain) {
 		this.chain = chain;

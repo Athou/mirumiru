@@ -24,6 +24,8 @@ public class RssPage extends WebPage {
 
 	private static final long serialVersionUID = 1L;
 
+	public static final String RSS_PATH = "rss";
+
 	@Inject
 	BundleService bundleService;
 

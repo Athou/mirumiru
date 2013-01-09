@@ -25,6 +25,8 @@ import fr.mirumiru.utils.WicketUtils.Language;
 
 @SuppressWarnings("serial")
 public class SitemapPage extends WebPage {
+	
+	public static final String SITEMAP_PATH = "sitemap.xml";
 
 	@Inject
 	StartupBean startupBean;

@@ -5,11 +5,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.apache.wicket.Application;
+import org.apache.wicket.DefaultMapperContext;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.cdi.ConversationPropagation;
+import org.apache.wicket.core.request.mapper.IMapperContext;
 import org.apache.wicket.markup.html.WebPage;
 
 import fr.mirumiru.auth.LoginPage;
@@ -30,6 +32,8 @@ import fr.mirumiru.pages.UpdatePage;
 import fr.mirumiru.utils.LocaleFirstMapper;
 
 public class MiruApplication extends AuthenticatedWebApplication {
+
+	public static final String RESOURCES_PREFIX_URL = "static";
 
 	@Override
 	protected void init() {
@@ -58,8 +62,8 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		mountPage("login", LoginPage.class);
 		mountPage("logout", LogoutPage.class);
 		mountPage("404", Error404Page.class);
-		mountPage("sitemap.xml", SitemapPage.class);
-		mountPage("rss", RssPage.class);
+		mountPage(SitemapPage.SITEMAP_PATH, SitemapPage.class);
+		mountPage(RssPage.RSS_PATH, RssPage.class);
 		mountPage("update", UpdatePage.class);
 
 		mountPage("about", AboutPage.class);
@@ -74,6 +78,16 @@ public class MiruApplication extends AuthenticatedWebApplication {
 
 	public static MiruApplication get() {
 		return (MiruApplication) Application.get();
+	}
+
+	@Override
+	protected IMapperContext newMapperContext() {
+		return new DefaultMapperContext(this) {
+			@Override
+			public String getNamespace() {
+				return RESOURCES_PREFIX_URL;
+			}
+		};
 	}
 
 	@Override
