@@ -58,6 +58,7 @@ public class GalleryListPage extends ContentPage {
 	public void renderHead(IHeaderResponse response) {
 		super.renderHead(response);
 		response.render(WicketUtils.loadCSS(GalleryListPage.class));
+		response.render(WicketUtils.loadJS(GalleryListPage.class));
 	}
 
 	@Override

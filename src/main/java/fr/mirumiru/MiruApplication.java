@@ -7,19 +7,12 @@ import javax.naming.NamingException;
 import org.apache.wicket.Application;
 import org.apache.wicket.DefaultMapperContext;
 import org.apache.wicket.Page;
-import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
-import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.cdi.CdiConfiguration;
 import org.apache.wicket.cdi.ConversationPropagation;
 import org.apache.wicket.core.request.mapper.IMapperContext;
-import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.protocol.http.WebApplication;
 
-import fr.mirumiru.auth.LoginPage;
-import fr.mirumiru.auth.LogoutPage;
-import fr.mirumiru.auth.MiruSession;
-import fr.mirumiru.pages.AboutPage;
 import fr.mirumiru.pages.ContactPage;
-import fr.mirumiru.pages.CrochetInfoPage;
 import fr.mirumiru.pages.Error404Page;
 import fr.mirumiru.pages.FAQPage;
 import fr.mirumiru.pages.FacebookNewsPage;
@@ -31,7 +24,7 @@ import fr.mirumiru.pages.SitemapPage;
 import fr.mirumiru.pages.UpdatePage;
 import fr.mirumiru.utils.LocaleFirstMapper;
 
-public class MiruApplication extends AuthenticatedWebApplication {
+public class MiruApplication extends WebApplication {
 
 	public static final String RESOURCES_PREFIX_URL = "static";
 
@@ -39,6 +32,10 @@ public class MiruApplication extends AuthenticatedWebApplication {
 	protected void init() {
 		super.init();
 		setupCDI();
+
+		getMarkupSettings().setStripWicketTags(true);
+		getMarkupSettings().setCompressWhitespace(true);
+
 		mountPages();
 		setRootRequestMapper(new LocaleFirstMapper(
 				getRootRequestMapperAsCompound()));
@@ -59,17 +56,13 @@ public class MiruApplication extends AuthenticatedWebApplication {
 
 	private void mountPages() {
 
-		mountPage("login", LoginPage.class);
-		mountPage("logout", LogoutPage.class);
 		mountPage("404", Error404Page.class);
 		mountPage(SitemapPage.SITEMAP_PATH, SitemapPage.class);
 		mountPage(RssPage.RSS_PATH, RssPage.class);
 		mountPage("update", UpdatePage.class);
 
-		mountPage("about", AboutPage.class);
 		mountPage("news/#{page}", FacebookNewsPage.class);
 		mountPage("portfolio", PortfolioPage.class);
-		mountPage("crochet", CrochetInfoPage.class);
 		mountPage("albums", GalleryListPage.class);
 		mountPage("faq", FAQPage.class);
 		mountPage("contact", ContactPage.class);
@@ -95,13 +88,4 @@ public class MiruApplication extends AuthenticatedWebApplication {
 		return HomePage.class;
 	}
 
-	@Override
-	protected Class<? extends WebPage> getSignInPageClass() {
-		return LoginPage.class;
-	}
-
-	@Override
-	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
-		return MiruSession.class;
-	}
 }

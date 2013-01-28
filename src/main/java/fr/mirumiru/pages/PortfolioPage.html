@@ -3,20 +3,21 @@
 	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
 <body>
 	<wicket:extend>
-		<div class="row">
-			<div class="page-header">
-				<h1>
-					<wicket:message key="portfolio" />
-				</h1>
-			</div>
+		<div class="page-header">
+			<h1>
+				<wicket:message key="portfolio" />
+			</h1>
+		</div>
+		<div class="row-fluid">
 			<ul class="thumbnails gallery">
-				<li class="span2" wicket:id="product">
+				<li class="span3" wicket:id="product">
 					<div class="thumbnail center portfolio-div">
-						<a href="#" wicket:id="link" rel="portfolio"> <img src="#" wicket:id="image" />
+						<a href="#" wicket:id="link" rel="portfolio">
+							<img src="#" wicket:id="image" />
 						</a>
 						<div class="caption">
 							<div>
-								<strong><span wicket:id="name" /></strong>
+								<small><strong><span wicket:id="name" /></strong></small>
 							</div>
 							<small><span wicket:id="desc" /></small>
 						</div>

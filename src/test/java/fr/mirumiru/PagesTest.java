@@ -3,8 +3,6 @@ package fr.mirumiru;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
-import junit.framework.Assert;
-
 import org.apache.wicket.util.tester.WicketTester;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -13,6 +11,7 @@ import org.jboss.shrinkwrap.api.GenericArchive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

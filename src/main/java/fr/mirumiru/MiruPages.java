@@ -23,10 +23,8 @@ public class MiruPages {
 	public void init() {
 		menuPages = Lists.newArrayList();
 		menuPages.add(new PageModel("home", HomePage.class));
-		// menuPages.add(new PageModel("about", AboutPage.class));
 		menuPages.add(new PageModel("news", FacebookNewsPage.class));
 		menuPages.add(new PageModel("portfolio", PortfolioPage.class));
-		// menuPages.add(new PageModel("crochet", CrochetInfoPage.class));
 		menuPages.add(new PageModel("albums", GalleryListPage.class));
 		menuPages.add(new PageModel("faq", FAQPage.class));
 		menuPages.add(new PageModel("contact", ContactPage.class));
